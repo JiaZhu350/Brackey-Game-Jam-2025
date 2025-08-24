@@ -150,13 +150,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d886e655c4e80d4386f26fec331e15a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rb: {fileID: 826581818}
+  _rigidbody: {fileID: 826581818}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  _raycastLength: 1.5
-  _jumpForce: 350
   _normalSpeed: 5
+  _raycastLength: 2
+  _jumpForce: 350
+  _dashCooldown: 3
+  _dashTime: 0.2
+  _dashSpeed: 20
 --- !u!50 &826581818
 Rigidbody2D:
   serializedVersion: 5
@@ -183,7 +186,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!4 &826581819
 Transform:
   m_ObjectHideFlags: 0
