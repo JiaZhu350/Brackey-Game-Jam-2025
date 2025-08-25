@@ -18,7 +18,7 @@ public class MeleeAttack : IAttack
         // Wind-up
         yield return new WaitForSeconds(windup);
 
-        Debug.Log("Enemy melee attacking player");
+        Debug.Log($"Enemy dealt {dmg} melee dmg to player");
         /*var health = player.GetComponent<>();
         if (health != null)
         {
