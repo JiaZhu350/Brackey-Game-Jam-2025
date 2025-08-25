@@ -14,7 +14,8 @@ public class JumpingMovement : IMovement
     }
     public void MoveToward(Vector2 target, float speed, float acceleration, Rigidbody2D rb)
     {
-        if (Time.time >= lastJumpTime + jumpCooldown)
+        float direction = Mathf.Sign(target.x - rb.position.x);
+        if (Time.time >= lastJumpTime + jumpCooldown && IsGroundAhead(rb, direction))
         {
             // Vertical jump
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
@@ -23,7 +24,6 @@ public class JumpingMovement : IMovement
         }
         else if (Mathf.Abs(rb.linearVelocityY) >= 0.1f)
         {
-            float direction = Mathf.Sign(target.x - rb.position.x);
             float targetVelX = direction * speed;
 
             // Smooth horizontal drift
@@ -38,5 +38,14 @@ public class JumpingMovement : IMovement
                 rb.linearVelocity.y
             );
         }
+    }
+
+    private bool IsGroundAhead(Rigidbody2D rb, float dir, float checkDistance = 1f)
+    {
+        Vector2 origin = rb.position + new Vector2(dir * 0.3f, 0f);
+
+        // Raycast straight down to look for ground
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, checkDistance, LayerMask.GetMask("Ground"));
+        return hit.collider != null;
     }
 }

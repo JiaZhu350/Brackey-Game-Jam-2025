@@ -4,7 +4,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     private enum MovementType { Ground, Flying, Jumping, None }
-
+    private enum AttackType { Melee, Dash, None}
     private enum State { Idle, Patrol, Follow, Attack }
 
     [Header("Movement")]
@@ -22,10 +22,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _jumpCd = 1f;
 
     [Header("Attack")]
+    [SerializeField] private AttackType _attackType;
     [SerializeField] private float _maxHp;
     [SerializeField] private float _currentHp;
     [SerializeField] private float _atkDamage;
+    [SerializeField] private float _atkWindup;
+    [SerializeField] private float _atkCd;
     [SerializeField] private float _attackRange = 2f;
+
+    [Header("Dash (if selected)")]
+    [SerializeField] private float _dashPower;
+    [SerializeField] private float _dashDuration;
 
     [Header("References")]
     [SerializeField] private Transform[] _patrolPoints;
@@ -35,6 +42,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private State _currentState;
     private IMovement _movement;
+    private IAttack _attack;
     private int _patrolIndex;
     private float _idleTimer = 0f;
 
@@ -53,6 +61,19 @@ public class Enemy : MonoBehaviour
                 break;
             case MovementType.None:
                 _movement = null;
+                break;
+        }
+        bool grounded = (_movementType != MovementType.Flying);
+        switch (_attackType)
+        {
+            case AttackType.Melee:
+                _attack = new MeleeAttack();
+                break;
+            case AttackType.Dash:
+                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, grounded);
+                break;
+            case AttackType.None:
+                _attack = null;
                 break;
         }
     }
@@ -115,11 +136,12 @@ public class Enemy : MonoBehaviour
     // Attacks the player
     private void Attack()
     {
-        if (_movement != null)
+        if (_attack != null)
         {
-            _movement.MoveToward(transform.position, 0f, _deceleration, _rb);
+            if (!_attack.rbRestricted) _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
+            StartCoroutine(_attack.AttackPlayer(_player, _atkDamage, _atkWindup, _atkCd, _rb));
         }
-        Debug.Log("Enemy Attacking");
+        else Idle();
     }
 
     private void HandleStates()
