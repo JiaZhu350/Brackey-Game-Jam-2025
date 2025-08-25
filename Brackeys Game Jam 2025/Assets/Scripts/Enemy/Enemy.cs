@@ -1,0 +1,152 @@
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+    private enum MovementType { Ground, Flying, Jumping, None }
+
+    private enum State { Idle, Patrol, Follow, Attack }
+
+    [Header("Movement")]
+    [SerializeField] private MovementType _movementType;
+    [SerializeField] private float _patrolSpeed;
+    [SerializeField] private float _chaseSpeed;
+    [SerializeField] private float _acceleration = 3f;
+    [SerializeField] private float _deceleration = 5f;
+    [SerializeField] private float _detectionRange = 5f;
+    [SerializeField] private float _stoppingDistance = 0.2f;
+    [SerializeField] private float _idleTime = 2f;
+
+    [Header("Jump (if selected)")]
+    [SerializeField] private float _jumpForce = 8f;
+    [SerializeField] private float _jumpCd = 1f;
+
+    [Header("Attack")]
+    [SerializeField] private float _maxHp;
+    [SerializeField] private float _currentHp;
+    [SerializeField] private float _atkDamage;
+    [SerializeField] private float _attackRange = 2f;
+
+    [Header("References")]
+    [SerializeField] private Transform[] _patrolPoints;
+    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] private Animator _anim;
+    [SerializeField] private Transform _player;
+
+    [SerializeField] private State _currentState;
+    private IMovement _movement;
+    private int _patrolIndex;
+    private float _idleTimer = 0f;
+
+    private void Awake()
+    {
+        switch (_movementType)
+        {
+            case MovementType.Ground:
+                _movement = new GroundMovement();
+                break;
+            case MovementType.Flying:
+                _movement = new FlyingMovement();
+                break;
+            case MovementType.Jumping:
+                _movement = new JumpingMovement(_jumpForce, _jumpCd);
+                break;
+            case MovementType.None:
+                _movement = null;
+                break;
+        }
+    }
+
+    private void Update()
+    {
+       switch (_currentState)
+        {
+            case State.Idle:
+                Idle();
+                break;
+            case State.Patrol:
+                Patrol();
+                break;
+            case State.Follow:
+                Follow();
+                break;
+            case State.Attack:
+                Attack();
+                break;
+        }
+        HandleStates();
+    }
+
+    // Idle for a few seconds before resuming patrol
+    private void Idle()
+    {
+        if (_movement == null) return;
+        _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
+        _idleTimer += Time.deltaTime;
+        if (_idleTimer >= _idleTime)
+        {
+            _idleTimer = 0f;
+            _currentState = State.Patrol;
+        }
+    }
+
+    // Move between patrol points
+    private void Patrol()
+    {
+        if (_movement == null) return;
+        if (_patrolPoints.Length == 0) return; // no points to patrol
+        Transform targetPoint = _patrolPoints[_patrolIndex];
+        _movement.MoveToward(targetPoint.position, _patrolSpeed, _acceleration, _rb);
+
+        if (Vector2.Distance(transform.position, targetPoint.position) < _stoppingDistance)
+        {
+            _patrolIndex = (_patrolIndex + 1) % _patrolPoints.Length;
+            _currentState = State.Idle;
+        }
+    }
+
+    // Follows the player
+    private void Follow()
+    {
+        if (_movement == null) return;
+        _movement.MoveToward(_player.position, _patrolSpeed, _acceleration, _rb);
+    }
+
+    // Attacks the player
+    private void Attack()
+    {
+        if (_movement != null)
+        {
+            _movement.MoveToward(transform.position, 0f, _deceleration, _rb);
+        }
+        Debug.Log("Enemy Attacking");
+    }
+
+    private void HandleStates()
+    {
+        float playerDistance = Vector2.Distance(transform.position, _player.position);
+        if (playerDistance <= _attackRange) // attacks the player when in range
+        {
+            _currentState = State.Attack;
+        }
+        else if (playerDistance <= _detectionRange) // follows the player in range
+        {
+            _currentState = State.Follow;
+        }
+        else if (_currentState == State.Attack || _currentState == State.Follow) // else idle
+        {
+            _currentState = State.Idle;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        // Attack range
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _attackRange);
+
+        // Detection range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
+    }
+}
