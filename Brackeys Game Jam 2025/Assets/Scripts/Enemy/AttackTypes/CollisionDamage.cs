@@ -7,8 +7,9 @@ public class CollisionDamage : MonoBehaviour
     [SerializeField] private float _cooldown;
     private bool _ready = true;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log(collision.tag);
         if (collision.gameObject.CompareTag("Player") && _ready)
         {
             StartCoroutine(DealDamage());
