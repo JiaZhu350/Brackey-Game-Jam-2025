@@ -23,8 +23,6 @@ public class Enemy : MonoBehaviour
 
     [Header("Attack")]
     [SerializeField] private AttackType _attackType;
-    [SerializeField] private float _maxHp;
-    [SerializeField] private float _currentHp;
     [SerializeField] private float _atkDamage;
     [SerializeField] private float _atkWindup;
     [SerializeField] private float _atkCd;
