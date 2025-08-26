@@ -37,12 +37,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _anim;
     [SerializeField] private Transform _player;
+    [SerializeField] private BoxCollider2D _groundCheck;
+    [SerializeField] private ParticleSystem _dustVFX;
 
     [SerializeField] private State _currentState;
     private IMovement _movement;
     private IAttack _attack;
     private int _patrolIndex;
     private float _idleTimer = 0f;
+    private bool _grounded;
 
     private void Awake()
     {
@@ -61,14 +64,14 @@ public class Enemy : MonoBehaviour
                 _movement = null;
                 break;
         }
-        bool grounded = (_movementType != MovementType.Flying);
+        bool groundedType = (_movementType != MovementType.Flying);
         switch (_attackType)
         {
             case AttackType.Melee:
                 _attack = new MeleeAttack();
                 break;
             case AttackType.Dash:
-                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, grounded);
+                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType);
                 break;
             case AttackType.None:
                 _attack = null;
@@ -78,6 +81,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        CheckGround();
+        if (_grounded && Mathf.Abs(_rb.linearVelocity.x) >= 0.1f)
+        {
+            _dustVFX.Play();
+        }
        switch (_currentState)
         {
             case State.Idle:
@@ -157,6 +165,12 @@ public class Enemy : MonoBehaviour
         {
             _currentState = State.Idle;
         }
+    }
+
+    private void CheckGround()
+    {
+        // Check if groundCheck collider overlaps with groundMask, return true if does
+        _grounded = Physics2D.OverlapAreaAll(_groundCheck.bounds.min, _groundCheck.bounds.max, LayerMask.GetMask("Ground")).Length > 0;
     }
 
     private void OnDrawGizmosSelected()
