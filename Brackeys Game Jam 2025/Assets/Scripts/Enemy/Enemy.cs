@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _detectionRange = 5f;
     [SerializeField] private float _stoppingDistance = 0.2f;
     [SerializeField] private float _idleTime = 2f;
+    [SerializeField] private bool _isFacingLeft = true;
+    [SerializeField] private float _duskRate = 20f;
 
     [Header("Jump (if selected)")]
     [SerializeField] private float _jumpForce = 8f;
@@ -49,6 +51,8 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        var duskEmission = _dustVFX.emission;
+        duskEmission.rateOverTime = _duskRate;
         switch (_movementType)
         {
             case MovementType.Ground:
@@ -169,13 +173,12 @@ public class Enemy : MonoBehaviour
     }
     private void UpdateFacingDirection()
     {
-        if (_rb.linearVelocity.x > 0.1f) // moving right
+        if ((_rb.linearVelocity.x > 0.1f && _isFacingLeft) || (_rb.linearVelocity.x < -0.1f && !_isFacingLeft))
         {
-            transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (_rb.linearVelocity.x < -0.1f) // moving left
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
+            transform.localScale = new Vector3(transform.localScale.x * -1,
+                transform.localScale.y, transform.localScale.z);
+            _dustVFX.gameObject.transform.localScale = new Vector3(transform.localScale.x * -1,
+                transform.localScale.y, transform.localScale.z);
         }
     }
 
