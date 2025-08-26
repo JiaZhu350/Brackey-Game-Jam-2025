@@ -86,6 +86,7 @@ public class Enemy : MonoBehaviour
         {
             _dustVFX.Play();
         }
+        UpdateFacingDirection();
        switch (_currentState)
         {
             case State.Idle:
@@ -164,6 +165,17 @@ public class Enemy : MonoBehaviour
         else if (_currentState == State.Attack || _currentState == State.Follow) // else idle
         {
             _currentState = State.Idle;
+        }
+    }
+    private void UpdateFacingDirection()
+    {
+        if (_rb.linearVelocity.x > 0.1f) // moving right
+        {
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        else if (_rb.linearVelocity.x < -0.1f) // moving left
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
 
