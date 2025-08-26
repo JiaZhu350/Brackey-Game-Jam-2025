@@ -269,6 +269,8 @@ MonoBehaviour:
   _detectionRange: 5
   _stoppingDistance: 0.2
   _idleTime: 2
+  _isFacingLeft: 1
+  _duskRate: 20
   _jumpForce: 10
   _jumpCd: 1
   _attackType: 2
@@ -587,6 +589,8 @@ MonoBehaviour:
   _detectionRange: 5
   _stoppingDistance: 0.2
   _idleTime: 2
+  _isFacingLeft: 1
+  _duskRate: 20
   _jumpForce: 8
   _jumpCd: 1
   _attackType: 0
@@ -1652,6 +1656,8 @@ MonoBehaviour:
   _detectionRange: 5
   _stoppingDistance: 0.2
   _idleTime: 2
+  _isFacingLeft: 1
+  _duskRate: 20
   _jumpForce: 8
   _jumpCd: 1
   _attackType: 0
@@ -1888,6 +1894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Biscuit
       objectReference: {fileID: 0}
+    - target: {fileID: 5257703290671053684, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -7037197404083509838, guid: 0531296c8986d444aa3cd7a23e3256c3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
