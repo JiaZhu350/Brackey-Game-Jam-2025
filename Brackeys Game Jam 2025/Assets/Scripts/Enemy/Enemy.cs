@@ -51,6 +51,8 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _player = player.transform;
         var duskEmission = _dustVFX.emission;
         duskEmission.rateOverTime = _duskRate;
         switch (_movementType)
