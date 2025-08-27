@@ -9,7 +9,6 @@ public class CollisionDamage : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.tag);
         if (collision.gameObject.CompareTag("Player") && _ready)
         {
             StartCoroutine(DealDamage());

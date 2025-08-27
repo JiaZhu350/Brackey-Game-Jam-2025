@@ -37,17 +37,17 @@ public class Enemy : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform[] _patrolPoints;
     [SerializeField] private Rigidbody2D _rb;
-    [SerializeField] private Animator _anim;
     [SerializeField] private Transform _player;
     [SerializeField] private BoxCollider2D _groundCheck;
     [SerializeField] private ParticleSystem _dustVFX;
+    [SerializeField] private EnemyAttackAnimation _enemyAtkAnim;
 
     [SerializeField] private State _currentState;
     private IMovement _movement;
     private IAttack _attack;
     private int _patrolIndex;
     private float _idleTimer = 0f;
-    private bool _grounded;
+    public bool grounded;
 
     private void Awake()
     {
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         switch (_attackType)
         {
             case AttackType.Melee:
-                _attack = new MeleeAttack();
+                _attack = new MeleeAttack(_enemyAtkAnim);
                 break;
             case AttackType.Dash:
                 _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType);
@@ -86,7 +86,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         CheckGround();
-        if (_grounded && Mathf.Abs(_rb.linearVelocity.x) >= 0.1f)
+        if (grounded && Mathf.Abs(_rb.linearVelocity.x) >= 0.1f)
         {
             _dustVFX.Play();
         }
@@ -179,13 +179,14 @@ public class Enemy : MonoBehaviour
                 transform.localScale.y, transform.localScale.z);
             _dustVFX.gameObject.transform.localScale = new Vector3(transform.localScale.x * -1,
                 transform.localScale.y, transform.localScale.z);
+            _isFacingLeft = !_isFacingLeft;
         }
     }
 
     private void CheckGround()
     {
         // Check if groundCheck collider overlaps with groundMask, return true if does
-        _grounded = Physics2D.OverlapAreaAll(_groundCheck.bounds.min, _groundCheck.bounds.max, LayerMask.GetMask("Ground")).Length > 0;
+        grounded = Physics2D.OverlapAreaAll(_groundCheck.bounds.min, _groundCheck.bounds.max, LayerMask.GetMask("Ground")).Length > 0;
     }
 
     private void OnDrawGizmosSelected()
