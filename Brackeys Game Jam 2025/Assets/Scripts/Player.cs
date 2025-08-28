@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseMaxHeath;
     [SerializeField] private float _invincibleCooldown;
     private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     private bool _isInvincible;
     public float HealthModifier { private set; get; } // Reference to modified max health rather than current health
 
@@ -184,13 +184,15 @@ public class Player : MonoBehaviour
     {
         if (_isInvincible){ return; }
 
+        Debug.Log($"Player took {_damageTaken} dmg");
+
         float resistanceCalculation = (_baseResistance + ResistanceModifier) / 100f;
         if (resistanceCalculation > 0.9f)
         {
             resistanceCalculation = 0.9f;
         }
 
-        _currentHealth -= _damageTaken * resistanceCalculation;
+        _currentHealth -= _damageTaken * (1 - resistanceCalculation);
         StartCoroutine(InvincibleTimer());
 
         if (_currentHealth <= 0)
@@ -218,6 +220,7 @@ public class Player : MonoBehaviour
     private void PlayDeath()
     {
         _isPlayerDead = true;
+        Debug.Log("Player died");
         // Player Death Animation
     }
 

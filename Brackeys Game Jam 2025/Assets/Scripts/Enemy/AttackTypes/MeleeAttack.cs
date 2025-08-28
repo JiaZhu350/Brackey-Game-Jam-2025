@@ -25,11 +25,7 @@ public class MeleeAttack : IAttack
         yield return new WaitForSeconds(windup);
 
         Debug.Log($"Enemy dealt {dmg} melee dmg to player");
-        /*var health = player.GetComponent<>();
-        if (health != null)
-        {
-            health.TakeDamage(damage);
-        }*/
+        player.gameObject.GetComponent<Player>().TakeDamage(dmg);
 
         _atkAnim.EndAttack();
         // Cooldown

@@ -255,7 +255,8 @@ MonoBehaviour:
     m_Bits: 128
   _baseMaxHeath: 500
   _invincibleCooldown: 0
-  _attackDamage: 50
+  _currentHealth: 0
+  _attackDamage: 10
   _attackRadius: 0.8
   _attackCooldown: 0.4
   _baseResistance: 0
