@@ -63,9 +63,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseResistance;
     public float ResistanceModifier { private set; get; }
 
+    [Header("Inventory")]
+    [SerializeField] private int _biscuitAmount = 0;
+
     private bool _isFacingRight; //Sprite flip logic
     private bool _isPlayerDead;
-
 
 
     private void Awake()
@@ -222,6 +224,12 @@ public class Player : MonoBehaviour
         _isPlayerDead = true;
         Debug.Log("Player died");
         // Player Death Animation
+    }
+
+    public void ModifyBiscuit(int amount)
+    {
+        _biscuitAmount += amount;
+        if (_biscuitAmount < 0) _biscuitAmount = 0;
     }
 
 
