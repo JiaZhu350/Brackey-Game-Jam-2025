@@ -10,13 +10,15 @@ public class DashAttack : IAttack
     private float _dashDuration;
     private float _deceleration;
     private bool _grounded;
+    private EnemyAttackAnimation _atkAnim;
 
-    public DashAttack(float dashPower, float dashDuration, float deceleration, bool grounded)
+    public DashAttack(float dashPower, float dashDuration, float deceleration, bool grounded, EnemyAttackAnimation atkAnim)
     {
         this._dashPower = dashPower;
         this._dashDuration = dashDuration;
         this._deceleration = deceleration;
         this._grounded = grounded;
+        this._atkAnim = atkAnim;
     }
     public IEnumerator AttackPlayer(Transform player, float dmg, float windup, float cd, Rigidbody2D rb)
     {
@@ -39,6 +41,7 @@ public class DashAttack : IAttack
             yield break;
         }
         _isAttacking = true;
+        _atkAnim.StartAttack();
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
 
         // Wind-up
@@ -55,7 +58,7 @@ public class DashAttack : IAttack
             Vector2 dir = ((Vector2)player.position - rb.position).normalized;
             rb.linearVelocity = dir * _dashPower;
         }
-
+        _atkAnim.EndAttack();
         yield return new WaitForSeconds(_dashDuration);
         _isDashing = false;
         // Cooldown

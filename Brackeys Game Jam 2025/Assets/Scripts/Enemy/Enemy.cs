@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
                 _attack = new MeleeAttack(_enemyAtkAnim);
                 break;
             case AttackType.Dash:
-                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType);
+                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType, _enemyAtkAnim);
                 break;
             case AttackType.None:
                 _attack = null;
@@ -128,7 +128,7 @@ public class Enemy : MonoBehaviour
     private void Patrol()
     {
         if (_movement == null) return;
-        if (_patrolPoints.Length == 0) return; // no points to patrol
+        if (_patrolPoints == null || _patrolPoints.Length == 0) return; // no points to patrol
         Transform targetPoint = _patrolPoints[_patrolIndex];
         _movement.MoveToward(targetPoint.position, _patrolSpeed, _acceleration, _rb);
 
