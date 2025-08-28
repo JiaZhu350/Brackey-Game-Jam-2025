@@ -311,7 +311,7 @@ MonoBehaviour:
   _atkDamage: 15
   _atkWindup: 0.3
   _atkCd: 2
-  _attackRange: 0.8
+  _attackRange: 0.9
   _dashPower: 0
   _dashDuration: 0
   _patrolPoints:
@@ -323,6 +323,7 @@ MonoBehaviour:
   _dustVFX: {fileID: 8325666809745803703}
   _enemyAtkAnim: {fileID: 2189066422322454448}
   _currentState: 0
+  _isStunned: 0
   grounded: 0
 --- !u!61 &5190480511604844741
 BoxCollider2D:
@@ -385,7 +386,11 @@ MonoBehaviour:
   _maxHp: 100
   _currentHp: 0
   _biscuitsAmount: 10
+  _knockbackAmount: 20
+  _knockbackDuration: 0.7
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
+  _rb: {fileID: 2770534485625981825}
+  _animator: {fileID: 2591131876496460896}
 --- !u!1001 &2889291290207615310
 PrefabInstance:
   m_ObjectHideFlags: 0

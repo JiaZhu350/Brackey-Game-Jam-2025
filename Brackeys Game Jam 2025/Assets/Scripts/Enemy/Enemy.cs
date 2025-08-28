@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ public class Enemy : MonoBehaviour
     private IAttack _attack;
     private int _patrolIndex;
     private float _idleTimer = 0f;
+    [SerializeField] private bool _isStunned = false;
     public bool grounded;
 
     private void Awake()
@@ -88,6 +90,11 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         CheckGround();
+        if (_isStunned)
+        {
+            if (_movement != null) _movement.MoveToward(transform.position, 0f, _deceleration, _rb);
+            return;
+        }
         if (grounded && Mathf.Abs(_rb.linearVelocity.x) >= 0.1f)
         {
             _dustVFX.Play();
@@ -151,10 +158,18 @@ public class Enemy : MonoBehaviour
     {
         if (_attack != null)
         {
-            if (!_attack.rbRestricted) _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
+            if (!_attack.rbRestricted && _movement != null) _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
             StartCoroutine(_attack.AttackPlayer(_player, _atkDamage, _atkWindup, _atkCd, _rb));
         }
         else Idle();
+    }
+
+    public IEnumerator Stun(float duration)
+    {
+        if (_isStunned) yield break;
+        _isStunned = true;
+        yield return new WaitForSeconds(duration);
+        _isStunned = false;
     }
 
     private void HandleStates()

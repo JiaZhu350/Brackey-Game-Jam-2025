@@ -172,6 +172,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D _enemy in _hitEnemies)
         {
             Debug.Log(_enemy.name + " is hit for " + (_attackDamage + DamageModifier) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(_attackDamage + DamageModifier, transform);
         }
 
         yield return new WaitForSeconds(_attackCooldown);
