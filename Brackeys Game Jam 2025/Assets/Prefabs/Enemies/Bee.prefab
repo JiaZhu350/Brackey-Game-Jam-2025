@@ -246,8 +246,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 849121137
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 6683615111705859281, guid: 123256c938afa5b46a2275fe5358048a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -399,6 +399,7 @@ MonoBehaviour:
   _dustVFX: {fileID: 4977913902954285948}
   _enemyAtkAnim: {fileID: 6712374018832774049}
   _currentState: 0
+  _isStunned: 0
   grounded: 0
 --- !u!61 &2996419691506278347
 BoxCollider2D:
@@ -461,7 +462,11 @@ MonoBehaviour:
   _maxHp: 100
   _currentHp: 0
   _biscuitsAmount: 10
+  _knockbackAmount: 10
+  _knockbackDuration: 1
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
+  _rb: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!1001 &2199863930712324997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,10 +478,6 @@ PrefabInstance:
     - target: {fileID: 3502526618915894435, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
       propertyPath: m_Name
       value: DustVFX
-      objectReference: {fileID: 0}
-    - target: {fileID: 8560714809315258871, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8560714809315258871, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
       propertyPath: m_LocalPosition.x
