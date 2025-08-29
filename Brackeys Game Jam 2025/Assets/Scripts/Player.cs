@@ -232,6 +232,10 @@ public class Player : MonoBehaviour
         if (_biscuitAmount < 0) _biscuitAmount = 0;
     }
 
+    public int GetBiscuit()
+    {
+        return _biscuitAmount;
+    }
 
     //Modified Values
     private void ResetAllModifiers()
