@@ -20,7 +20,7 @@ MonoBehaviour:
   _normalRiskCostReduction: 20
   _riskUpperLimit: 10
   _riskLowerLimit: -10
-  _itemSprite: {fileID: -7037197404083509838, guid: 0531296c8986d444aa3cd7a23e3256c3, type: 3}
+  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
   _itemName: Energy Bisuit
   _initialBiscuitCost: 50
   _itemDescription: Increase Speed at the expense of Health
