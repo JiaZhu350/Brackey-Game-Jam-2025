@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Movement Logic")]
     [SerializeField] private float _normalSpeed;
-    [SerializeField] private float _speedModifierDivisor;
+    [SerializeField] private float _speedModifierDivisor = 1f;
     private float _horizontalDirection;
     private float _speed;
     public float SpeedModifier { private set; get; }
@@ -108,7 +108,6 @@ public class Player : MonoBehaviour
     {
         if (_isDashing || _isPlayerDead) { return; }
 
-        if (_horizontalDirection == 0){ return; }
         _rigidbody.linearVelocity = new Vector2(_horizontalDirection * (_speed + SpeedModifier/_speedModifierDivisor), _rigidbody.linearVelocityY); //Player movement
     }
 
