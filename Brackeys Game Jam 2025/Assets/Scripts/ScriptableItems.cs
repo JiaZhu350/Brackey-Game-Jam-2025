@@ -150,7 +150,7 @@ public class ScriptableItems : ScriptableObject
 
     private void RiskedStatMod()
     {
-        float _modifyAmount = Random.Range(_riskLowerLimit, _riskUpperLimit);
+        float _modifyAmount = Mathf.Round(Random.Range(_riskLowerLimit, _riskUpperLimit));
         //Debug.Log(_modifyAmount);
         switch (_statRisked)
         {
