@@ -465,8 +465,8 @@ MonoBehaviour:
   _knockbackAmount: 10
   _knockbackDuration: 1
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
-  _rb: {fileID: 0}
-  _animator: {fileID: 0}
+  _rb: {fileID: 3876801432103470248}
+  _animator: {fileID: 3732515848133028646}
 --- !u!1001 &2199863930712324997
 PrefabInstance:
   m_ObjectHideFlags: 0
