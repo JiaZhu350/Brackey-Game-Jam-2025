@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private UIController _uiController;
 
 
     //Movement Stats
@@ -74,6 +75,7 @@ public class Player : MonoBehaviour
     {
         ResetAllModifiers();
         ResetStats();
+        _uiController.UpdateBiscuitUI(_biscuitAmount);
     }
 
 
@@ -230,6 +232,7 @@ public class Player : MonoBehaviour
     {
         _biscuitAmount += amount;
         if (_biscuitAmount < 0) _biscuitAmount = 0;
+        _uiController.UpdateBiscuitUI(_biscuitAmount);
     }
 
     public int GetBiscuit()
