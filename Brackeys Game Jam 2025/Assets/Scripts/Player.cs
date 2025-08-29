@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 
     [Header("Movement Logic")]
     [SerializeField] private float _normalSpeed;
+    [SerializeField] private float _speedModifierDivisor;
     private float _horizontalDirection;
     private float _speed;
     public float SpeedModifier { private set; get; }
@@ -107,7 +108,8 @@ public class Player : MonoBehaviour
     {
         if (_isDashing || _isPlayerDead) { return; }
 
-        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * _speed + SpeedModifier, _rigidbody.linearVelocityY); //Player movement
+        if (_horizontalDirection == 0){ return; }
+        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * (_speed + SpeedModifier/_speedModifierDivisor), _rigidbody.linearVelocityY); //Player movement
     }
 
     private void ResetStats()
@@ -156,7 +158,7 @@ public class Player : MonoBehaviour
         _canDash = false;
         float originalGravity = _rigidbody.gravityScale;
         _rigidbody.gravityScale = 0f; //Makes gravity unable to affect the Dash
-        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * _dashSpeed + SpeedModifier, 0f); //Dashing Speed
+        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * (_dashSpeed + SpeedModifier/_speedModifierDivisor), 0f); //Dashing Speed
 
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;

@@ -1,4 +1,4 @@
-using System.Diagnostics;
+
 using System.Threading;
 using UnityEngine;
 
@@ -6,7 +6,7 @@ using UnityEngine;
 public class ScriptableItems : ScriptableObject
 {
     private enum PlayerStatMod { Speed, Health, Attack, Resistance, None }
-    private enum RiskType { Normal, AllIn }
+    private enum RiskType { Normal, AllIn}
 
 
     [Header("Item Functionality")]
@@ -29,8 +29,8 @@ public class ScriptableItems : ScriptableObject
     public Sprite ItemSprite => _itemSprite;
     [SerializeField] private string _itemName;
     public string ItemName => _itemName;
-    [SerializeField] private int _itemCost;
-    public int ItemCost => _itemCost;
+    [SerializeField] private int _initialBiscuitCost;
+    public int CostOfItem => _initialBiscuitCost;
     [TextArea][SerializeField] private string _itemDescription;
     public string ItemDescrition => _itemDescription;
 
@@ -96,8 +96,14 @@ public class ScriptableItems : ScriptableObject
         }
     }
 
-    public void RiskStats()
+    public void ApplyRiskStats()
     {
+        if (_player == null)
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+
+        ApplyStats();
         switch (_riskLevel)
         {
             case RiskType.Normal:
@@ -109,10 +115,28 @@ public class ScriptableItems : ScriptableObject
         }
     }
 
+    public int NormalBiscuitCost()
+    {
+        return _initialBiscuitCost;
+    }
+
+    public int RiskBiscuitCost()
+    {
+        switch (_riskLevel)
+        {
+            case RiskType.Normal:
+                return _initialBiscuitCost - _normalRiskCostReduction;
+            case RiskType.AllIn:
+                return 1;
+        }
+        return NormalBiscuitCost();
+    }
+
 
     private void NormalRisk()
     {
         _statRisked = (PlayerStatMod)Random.Range(0, System.Enum.GetValues(typeof(PlayerStatMod)).Length - 1);
+        RiskedStatMod();
     }
 
     private void RiskAll() //Risk all stats for massive discount
@@ -120,11 +144,14 @@ public class ScriptableItems : ScriptableObject
         for (int _loopAmount = 0; _loopAmount < 5; _loopAmount++)
         {
             _statRisked = (PlayerStatMod)Random.Range(0, System.Enum.GetValues(typeof(PlayerStatMod)).Length - 1);
+            RiskedStatMod();
         }
     }
 
-    private void RiskedStatMod(float _modifyAmount)
+    private void RiskedStatMod()
     {
+        float _modifyAmount = Random.Range(_riskLowerLimit, _riskUpperLimit);
+        //Debug.Log(_modifyAmount);
         switch (_statRisked)
         {
             case PlayerStatMod.Speed:

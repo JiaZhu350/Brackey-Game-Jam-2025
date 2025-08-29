@@ -10,8 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8250c46812ee3514aabcaac699fa92bd, type: 3}
-  m_Name: ScriptableItems
+  m_Name: EnergyBiscuit
   m_EditorClassIdentifier: 
   _statModIncrease: 0
-  _statModDecrease: 0
+  _statModDecrease: 1
   _riskLevel: 0
+  _statIncreaseAmount: 5
+  _statDecreaseAmount: 20
+  _normalRiskCostReduction: 20
+  _riskUpperLimit: 10
+  _riskLowerLimit: -10
+  _itemSprite: {fileID: -7037197404083509838, guid: 0531296c8986d444aa3cd7a23e3256c3, type: 3}
+  _itemName: Energy Bisuit
+  _initialBiscuitCost: 50
+  _itemDescription: Increase Speed at the expense of Health
