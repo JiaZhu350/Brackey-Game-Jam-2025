@@ -13,7 +13,7 @@ public class UIController : MonoBehaviour
     }
 
     // enable and disable biscuit UI
-    public void ToggleBiscuit()
+    public void ToggleBiscuitUI()
     {
         if (_biscuitUI.activeSelf)
         {
