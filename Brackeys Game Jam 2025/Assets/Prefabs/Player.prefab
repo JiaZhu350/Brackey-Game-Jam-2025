@@ -406,6 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de4eac9a152949545b5b576815030223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 1217342377923615544}
+  _biscuitUI: {fileID: 605821918571513428}
   _biscuitText: {fileID: 8472127609497995974}
 --- !u!1 &6318223333116567235
 GameObject:
@@ -535,6 +537,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _normalSpeed: 5
+  _speedModifierDivisor: 0
   _raycastLength: 2
   _jumpForce: 500
   _dashCooldown: 3

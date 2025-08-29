@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    [SerializeField] private Player _player;
     [SerializeField] private GameObject _biscuitUI;
     [SerializeField] private TextMeshProUGUI _biscuitText;
 
-    public void UpdateBiscuitUI(int _amount)
+    public void UpdateBiscuitUI()
     {
-        _biscuitText.text = _amount.ToString();
+        _biscuitText.text = _player.GetBiscuit().ToString();
     }
 
     // enable and disable biscuit UI
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour
         else
         {
             _biscuitUI.SetActive(true);
+            UpdateBiscuitUI();
         }
     }
 }

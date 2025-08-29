@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
     {
         ResetAllModifiers();
         ResetStats();
-        _uiController.UpdateBiscuitUI(_biscuitAmount);
+        _uiController.UpdateBiscuitUI();
     }
 
 
@@ -234,7 +234,7 @@ public class Player : MonoBehaviour
     {
         _biscuitAmount += amount;
         if (_biscuitAmount < 0) _biscuitAmount = 0;
-        _uiController.UpdateBiscuitUI(_biscuitAmount);
+        _uiController.UpdateBiscuitUI();
     }
 
     public int GetBiscuit()
