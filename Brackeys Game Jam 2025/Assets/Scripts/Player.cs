@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
 
     [Header("Movement Logic")]
     [SerializeField] private float _normalSpeed;
+    [SerializeField] private float _speedModifierDivisor;
     private float _horizontalDirection;
     private float _speed;
     public float SpeedModifier { private set; get; }
@@ -46,7 +47,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseMaxHeath;
     [SerializeField] private float _invincibleCooldown;
     private float _maxHealth;
-    private float _currentHealth;
+    [SerializeField] private float _currentHealth;
     private bool _isInvincible;
     public float HealthModifier { private set; get; } // Reference to modified max health rather than current health
 
@@ -63,9 +64,11 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseResistance;
     public float ResistanceModifier { private set; get; }
 
+    [Header("Inventory")]
+    [SerializeField] private int _biscuitAmount = 0;
+
     private bool _isFacingRight; //Sprite flip logic
     private bool _isPlayerDead;
-
 
 
     private void Awake()
@@ -103,7 +106,8 @@ public class Player : MonoBehaviour
     {
         if (_isDashing || _isPlayerDead) { return; }
 
-        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * _speed + SpeedModifier, _rigidbody.linearVelocityY); //Player movement
+        if (_horizontalDirection == 0){ return; }
+        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * (_speed + SpeedModifier/_speedModifierDivisor), _rigidbody.linearVelocityY); //Player movement
     }
 
     private void ResetStats()
@@ -152,7 +156,7 @@ public class Player : MonoBehaviour
         _canDash = false;
         float originalGravity = _rigidbody.gravityScale;
         _rigidbody.gravityScale = 0f; //Makes gravity unable to affect the Dash
-        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * _dashSpeed + SpeedModifier, 0f); //Dashing Speed
+        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * (_dashSpeed + SpeedModifier/_speedModifierDivisor), 0f); //Dashing Speed
 
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
@@ -172,6 +176,7 @@ public class Player : MonoBehaviour
         foreach (Collider2D _enemy in _hitEnemies)
         {
             Debug.Log(_enemy.name + " is hit for " + (_attackDamage + DamageModifier) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(_attackDamage + DamageModifier, transform);
         }
 
         yield return new WaitForSeconds(_attackCooldown);
@@ -183,13 +188,15 @@ public class Player : MonoBehaviour
     {
         if (_isInvincible){ return; }
 
+        Debug.Log($"Player took {_damageTaken} dmg");
+
         float resistanceCalculation = (_baseResistance + ResistanceModifier) / 100f;
         if (resistanceCalculation > 0.9f)
         {
             resistanceCalculation = 0.9f;
         }
 
-        _currentHealth -= _damageTaken * resistanceCalculation;
+        _currentHealth -= _damageTaken * (1 - resistanceCalculation);
         StartCoroutine(InvincibleTimer());
 
         if (_currentHealth <= 0)
@@ -217,9 +224,20 @@ public class Player : MonoBehaviour
     private void PlayDeath()
     {
         _isPlayerDead = true;
+        Debug.Log("Player died");
         // Player Death Animation
     }
 
+    public void ModifyBiscuit(int amount)
+    {
+        _biscuitAmount += amount;
+        if (_biscuitAmount < 0) _biscuitAmount = 0;
+    }
+
+    public int GetBiscuit()
+    {
+        return _biscuitAmount;
+    }
 
     //Modified Values
     private void ResetAllModifiers()

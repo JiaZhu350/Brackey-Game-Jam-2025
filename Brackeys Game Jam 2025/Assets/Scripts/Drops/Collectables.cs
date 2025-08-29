@@ -8,8 +8,8 @@ public class Collectables : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            // Give player biscuits here
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<Player>().ModifyBiscuit(biscuits);
+            Destroy(gameObject);
         }
     }
 }

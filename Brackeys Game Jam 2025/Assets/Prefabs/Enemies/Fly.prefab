@@ -199,6 +199,7 @@ MonoBehaviour:
   _dustVFX: {fileID: 6586973218359892040}
   _enemyAtkAnim: {fileID: 6541272069152970651}
   _currentState: 0
+  _isStunned: 0
   grounded: 0
 --- !u!61 &2554748732329130934
 BoxCollider2D:
@@ -261,7 +262,11 @@ MonoBehaviour:
   _maxHp: 100
   _currentHp: 0
   _biscuitsAmount: 10
+  _knockbackAmount: 10
+  _knockbackDuration: 0.7
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
+  _rb: {fileID: 2049454628696338870}
+  _animator: {fileID: 5438121138873552278}
 --- !u!1 &7809617341547497549
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,8 +420,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 849121137
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 5688147070955505208, guid: d44f0f99786abd847b605579d3367d3f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
