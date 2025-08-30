@@ -207,6 +207,11 @@ MonoBehaviour:
   _attackRange: 0
   _dashPower: 0
   _dashDuration: 0
+  _audioRange: 0
+  _audioVolume: 0.5
+  _idleAudio: {fileID: 0}
+  _followAudio: {fileID: 0}
+  _attackAudio: {fileID: 0}
   _patrolPoints:
   - {fileID: 768298020}
   - {fileID: 1769706388}
@@ -1280,6 +1285,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2924339206572577217, guid: f09205d0904a1db4e84536321b4eb213, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4895341107473686761, guid: f09205d0904a1db4e84536321b4eb213, type: 3}
+      propertyPath: _patrolPoints.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8952733444362170844, guid: f09205d0904a1db4e84536321b4eb213, type: 3}

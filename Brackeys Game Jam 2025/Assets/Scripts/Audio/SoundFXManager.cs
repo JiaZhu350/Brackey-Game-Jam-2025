@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
@@ -8,6 +10,7 @@ public class SoundFXManager : MonoBehaviour
     [Header("References")]
     [SerializeField] private AudioSource soundFXObject;
     [SerializeField] private AudioSource _themeAudioSource;
+    [SerializeField] private List<AudioClip> _currentSFX = new List<AudioClip>();
 
     private void Awake()
     {
@@ -22,15 +25,21 @@ public class SoundFXManager : MonoBehaviour
         PlaySoundFXClip(_themeMusic, transform, 1, true);
     }
 
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop = false)
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop = false, bool regulated = true)
     {
+        if (_currentSFX.Contains(audioClip)) return;
+        _currentSFX.Add(audioClip);
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
         audioSource.clip = audioClip;
         audioSource.volume = volume;
         audioSource.loop = loop;
         audioSource.Play();
         float clipLength = audioSource.clip.length;
-        Destroy(audioSource.gameObject, clipLength);
+        if (!loop)
+        {
+            StartCoroutine(RemoveAudioClip(audioClip, clipLength));
+            Destroy(audioSource.gameObject, clipLength);
+        }
     }
 
     public void PlayRandomSoundFXClip(AudioClip[] audioClip, Transform spawnTransform, float volume, bool loop = false)
@@ -45,4 +54,9 @@ public class SoundFXManager : MonoBehaviour
         Destroy(audioSource.gameObject, clipLength);
     }
 
+    private IEnumerator RemoveAudioClip(AudioClip clip, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _currentSFX.Remove(clip);
+    }
 }
