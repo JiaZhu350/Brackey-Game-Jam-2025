@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,6 +9,10 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private UIController _uiController;
+
+    [Header("Camera Stuff")]
+    [SerializeField] private GameObject _cameraFollow;
+    private CameraFollowObject _cameraFollowObject;
 
 
     //Movement Stats
@@ -75,7 +80,7 @@ public class Player : MonoBehaviour
     [Header("Inventory")]
     [SerializeField] private int _biscuitAmount = 0;
 
-    private bool _isFacingRight; //Sprite flip logic
+    public bool _isFacingRight; //Sprite flip logic
     private bool _isPlayerDead;
 
 
@@ -86,6 +91,10 @@ public class Player : MonoBehaviour
         _uiController.UpdateBiscuitUI();
     }
 
+    private void Start()
+    {
+        _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowObject>();
+    } 
 
     private void Update()
     {
@@ -107,15 +116,15 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Attacking());
         }
-
-        FlippingPlayer();
     }
 
     void FixedUpdate()
     {
         if (_isDashing || _isPlayerDead) { return; }
 
-        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * Mathf.Max(_speed + SpeedModifier/_speedModifierDivisor, _minSpeed), _rigidbody.linearVelocityY); //Player movement
+        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * Mathf.Max(_speed + SpeedModifier / _speedModifierDivisor, _minSpeed), _rigidbody.linearVelocityY); //Player movement
+
+        FlippingPlayer();
     }
 
     private void ResetStats()
@@ -140,9 +149,25 @@ public class Player : MonoBehaviour
         if (_isFacingRight && _horizontalDirection < 0 || !_isFacingRight && _horizontalDirection > 0)
         {
             Vector3 localScale = transform.localScale;
+            if (_isFacingRight)
+            {
+                Vector3 rotator = new Vector3(transform.rotation.x, 180f, transform.rotation.x);
+                transform.rotation = Quaternion.Euler(rotator);
+
+                // turn the camera follow object
+                _cameraFollowObject.CallTurn();
+            }
+            else
+            {
+                Vector3 rotator = new Vector3(transform.rotation.x, 0f, transform.rotation.x);
+                transform.rotation = Quaternion.Euler(rotator);
+
+                // turn the camera follow object
+                _cameraFollowObject.CallTurn();
+            }
             _isFacingRight = !_isFacingRight;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
+            // localScale.x *= -1f;
+            // transform.localScale = localScale;
         }
     }
 
@@ -164,8 +189,15 @@ public class Player : MonoBehaviour
         _canDash = false;
         float originalGravity = _rigidbody.gravityScale;
         _rigidbody.gravityScale = 0f; //Makes gravity unable to affect the Dash
-        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * Mathf.Max(_dashSpeed + SpeedModifier/_speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
-
+        if (_isFacingRight)
+        {
+            _rigidbody.linearVelocity = new Vector2(Mathf.Max(_dashSpeed + SpeedModifier / _speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
+        }
+        else
+        {
+            _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier/_speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
+        }
+        
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
         _isDashing = false;
