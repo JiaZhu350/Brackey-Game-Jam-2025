@@ -314,7 +314,7 @@ MonoBehaviour:
   _attackRange: 0.9
   _dashPower: 0
   _dashDuration: 0
-  _audioRange: 8
+  _audioRange: 5
   _audioVolume: 0.5
   _idleAudio: {fileID: 8300000, guid: 1cccfd3b9b93ea74f9bd8cbccdd90598, type: 3}
   _followAudio: {fileID: 8300000, guid: 1cccfd3b9b93ea74f9bd8cbccdd90598, type: 3}
@@ -407,6 +407,14 @@ PrefabInstance:
     - target: {fileID: 3502526618915894435, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
       propertyPath: m_Name
       value: DustVFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 6598449399882117369, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
+      propertyPath: ShapeModule.m_Scale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8560714809315258871, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8560714809315258871, guid: ebf931ca4e19ac8498fcb2c8efc60479, type: 3}
       propertyPath: m_LocalPosition.x

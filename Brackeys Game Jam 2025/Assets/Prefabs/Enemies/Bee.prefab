@@ -397,8 +397,7 @@ MonoBehaviour:
   _idleAudio: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
   _followAudio: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
   _attackAudio: {fileID: 8300000, guid: ce7b1446b74604b43b2d7ad457dc057f, type: 3}
-  _patrolPoints:
-  - {fileID: 0}
+  _patrolPoints: []
   _rb: {fileID: 3876801432103470248}
   _player: {fileID: 0}
   _groundCheck: {fileID: 6659219911124193264}

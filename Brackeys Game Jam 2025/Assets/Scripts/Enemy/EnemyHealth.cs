@@ -25,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
         Vector2 dir = ((Vector2)player.position - _rb.position).normalized;
         _rb.AddForce(-dir * _knockbackAmount, ForceMode2D.Impulse);
         StartCoroutine(gameObject.GetComponent<Enemy>().Stun(_knockbackDuration));
+        _animator.SetTrigger("isHurt");
         if (_currentHp <= 0)
         {
             Die();

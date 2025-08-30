@@ -97,6 +97,11 @@ MonoBehaviour:
   _attackRange: 0
   _dashPower: 0
   _dashDuration: 0
+  _audioRange: 5
+  _audioVolume: 0.5
+  _idleAudio: {fileID: 0}
+  _followAudio: {fileID: 0}
+  _attackAudio: {fileID: 0}
   _patrolPoints: []
   _rb: {fileID: 5040413885406760340}
   _player: {fileID: 0}
