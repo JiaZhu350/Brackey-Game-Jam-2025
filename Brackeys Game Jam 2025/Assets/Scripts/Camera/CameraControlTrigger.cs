@@ -24,7 +24,6 @@ public class CameraControlTrigger : MonoBehaviour
             if (customInspectorObjects.swapCameras && customInspectorObjects.cameraFromRight != null && customInspectorObjects.cameraFromLeft != null)
             {
                 // swap cameras
-                Debug.Log("switching cameras");
                 CameraManager.instance.SwapCamera(customInspectorObjects.cameraFromRight, customInspectorObjects.cameraFromLeft, exitDirection);
             }
 

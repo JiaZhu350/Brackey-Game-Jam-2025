@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     //Movement Stats
     [Header("Movement Components")]
-    [SerializeField] private LayerMask _whatIsGround;
+    [SerializeField] private Collider2D _groundCheck;
 
 
     [Header("Movement Logic")]
@@ -32,9 +32,12 @@ public class Player : MonoBehaviour
 
 
     [Header("Jump Logic")]
-    [SerializeField] private float _raycastLength;
     [SerializeField] private float _jumpForce;
-    private bool _canJumpAgain;
+    [SerializeField] private float _coyoteTime;
+    [SerializeField] private float _normalGravityScale;
+    [SerializeField] private float _fallGravityScale;
+    private float _coyoteTimeCounter;
+    [SerializeField] private bool _canDoubleJump;
 
 
     [Header("Dashing Logic")]
@@ -104,10 +107,29 @@ public class Player : MonoBehaviour
         if (_isDashing || _isPlayerDead) { return; }
 
         _horizontalDirection = Input.GetAxisRaw("Horizontal");
+        SwitchGravityScale();
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && CanJump())
+        if (IsGrounded())
         {
-            PlayerJump();
+            _coyoteTimeCounter = _coyoteTime;
+            _canDoubleJump = true;
+        }
+        else
+        {
+            _coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (_coyoteTimeCounter > 0f)
+            {
+                PlayerJump();
+            }
+            else if (_canDoubleJump)
+            {
+                _canDoubleJump = false;
+                PlayerJump();
+            }
         }
 
         if (Keyboard.current.shiftKey.wasPressedThisFrame && _canDash)
@@ -152,13 +174,13 @@ public class Player : MonoBehaviour
         _isInvincible = false;
         _isFacingRight = true;
         _isDashing = false;
-        
-        _canJumpAgain = false;
+
         _canDash = true;
         _canAttack = true;
+        _canDoubleJump = false;
 
         _speed = _normalSpeed;
-        _currentHealth = _maxHealth = _baseMaxHeath + Mathf.Max(HealthModifier,_minHealth - _baseMaxHeath);
+        _currentHealth = _maxHealth = _baseMaxHeath + Mathf.Max(HealthModifier, _minHealth - _baseMaxHeath);
     }
 
 
@@ -190,16 +212,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool CanJump()
+    public bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, _raycastLength, _whatIsGround) || _canJumpAgain;
+        return Physics2D.OverlapAreaAll(_groundCheck.bounds.min, _groundCheck.bounds.max, LayerMask.GetMask("Ground")).Length > 0;
     }
 
     private void PlayerJump()
     {
         _rigidbody.linearVelocityY = 0f; // Reset the linear Y velocity to allow for better jumping logic
-        _rigidbody.AddForce(transform.up * _jumpForce);
-        _canJumpAgain = !_canJumpAgain;
+        _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void SwitchGravityScale()
+    {
+        if (_rigidbody.linearVelocityY >= 0)
+        {
+            _rigidbody.gravityScale = _normalGravityScale;
+        }
+        else
+        {
+            _rigidbody.gravityScale = _fallGravityScale;
+        }
     }
 
     private IEnumerator Dashing()
@@ -214,9 +247,9 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier/_speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
+            _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier / _speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
         }
-        
+
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
         _isDashing = false;
