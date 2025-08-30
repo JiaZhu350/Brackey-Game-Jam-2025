@@ -1074,6 +1074,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!50 &1349457699 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 7230525035553865530, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
+  m_PrefabInstance: {fileID: 472912805842862812}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1353349578
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,6 +1708,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4516688579875739868, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 472912805842862814}
+    - targetCorrespondingSourceObject: {fileID: 4516688579875739868, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 472912805842862816}
   m_SourcePrefab: {fileID: 100100000, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
 --- !u!1 &472912805842862813 stripped
 GameObject:
@@ -1731,6 +1739,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &472912805842862816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472912805842862813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d15508327231d8b4b92e0d96847b81ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _anim: {fileID: 472912805842862814}
+  _rb: {fileID: 1349457699}
 --- !u!1001 &2217428130598248644
 PrefabInstance:
   m_ObjectHideFlags: 0
