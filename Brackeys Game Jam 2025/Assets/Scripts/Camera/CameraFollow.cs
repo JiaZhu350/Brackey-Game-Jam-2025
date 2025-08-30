@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour {
 
-    public Transform player;
+    public Transform target;
 
     // Update is called once per frame
     void Update () {
-        transform.position = player.transform.position + new Vector3(0, 1, -5);
+        transform.position = target.transform.position + new Vector3(0, 1, -5);
     }
 }

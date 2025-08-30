@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     [Header("Camera Stuff")]
     [SerializeField] private GameObject _cameraFollow;
     private CameraFollowObject _cameraFollowObject;
+    private float _fallSpeedYDampingChangeThreshold;
 
 
     //Movement Stats
@@ -94,7 +96,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowObject>();
-    } 
+        _fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+    }
 
     private void Update()
     {
@@ -116,6 +119,22 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(Attacking());
         }
+
+        // if we are falling past a certain speed threshold
+        if (_rigidbody.linearVelocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            CameraManager.instance.LerpYDamping(true);
+        }
+
+        // if we are standing still or moving up
+        if (_rigidbody.linearVelocity.y >= 0f && !CameraManager.instance.IsLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+        {
+            // reset so it can be called again
+            CameraManager.instance.LerpedFromPlayerFalling = false;
+
+            CameraManager.instance.LerpYDamping(false);
+        }
+
     }
 
     void FixedUpdate()
