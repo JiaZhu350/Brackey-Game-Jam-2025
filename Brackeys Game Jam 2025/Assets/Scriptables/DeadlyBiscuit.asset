@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8250c46812ee3514aabcaac699fa92bd, type: 3}
-  m_Name: EnergyBiscuit
+  m_Name: DeadlyBiscuit
   m_EditorClassIdentifier: 
-  _statModIncrease: 0
-  _statModDecrease: 1
+  _statModIncrease: 2
+  _statModDecrease: 3
   _riskLevel: 0
-  _statIncreaseAmount: 20
-  _statDecreaseAmount: 10
-  _normalRiskCostReduction: 20
-  _riskUpperLimit: 10
-  _riskLowerLimit: -10
+  _statIncreaseAmount: 50
+  _statDecreaseAmount: 20
+  _normalRiskCostReduction: 40
+  _riskUpperLimit: 30
+  _riskLowerLimit: -30
   _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
-  _itemName: Energy Bisuit
-  _initialBiscuitCost: 50
-  _itemDescription: Increase Speed at the expense of Health
+  _itemName: DeadlyBiscuit
+  _initialBiscuitCost: 60
+  _itemDescription: More Damage at the cost of resistance
