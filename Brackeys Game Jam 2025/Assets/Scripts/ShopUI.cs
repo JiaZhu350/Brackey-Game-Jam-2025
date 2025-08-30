@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] private GameObject _container;
+    [SerializeField] private GameObject _playerUI;
 
     [Header("Item Box One")]
     [SerializeField] private Image _itemIconOne;
@@ -55,6 +56,7 @@ public class ShopUI : MonoBehaviour
             Debug.LogWarning("ItemHolder must only have 3 elements; Currently accessed ItemHolder contains " + _items.Length + "elements");
         }
         _container.SetActive(true);
+        _playerUI.SetActive(false);
         ResettingDisplay();
         Time.timeScale = 0f;
         _itemInBoxOne = _items[0];
@@ -179,6 +181,7 @@ public class ShopUI : MonoBehaviour
     public void ExitShop()
     {
         _container.SetActive(false);
+        _playerUI.SetActive(true);
         Time.timeScale = 1f;
     }
 }

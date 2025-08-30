@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [Header("Movement Logic")]
     [SerializeField] private float _normalSpeed;
     [SerializeField] private float _speedModifierDivisor = 1f;
+    [SerializeField] private float _minSpeed = 2.5f;
     private float _horizontalDirection;
     private float _speed;
     public float SpeedModifier { private set; get; }
@@ -49,6 +50,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _invincibleCooldown;
     private float _maxHealth;
     [SerializeField] private float _currentHealth;
+    [SerializeField] private float _minHealth = 50.0f;
+    [SerializeField] private float _healthModDivisor = 1f;
     private bool _isInvincible;
     public float HealthModifier { private set; get; } // Reference to modified max health rather than current health
 
@@ -57,12 +60,16 @@ public class Player : MonoBehaviour
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackRadius;
     [SerializeField] private float _attackCooldown;
+    [SerializeField] private float _minDamage = 5f;
+    [SerializeField] private float _damageModDivisor = 1f;
     private bool _canAttack;
     public float DamageModifier { private set; get; }
 
 
     [Header("Resistance")]
     [SerializeField] private float _baseResistance;
+    [SerializeField] private float _minResistance = -30f;
+    [SerializeField] private float _resistanceModDivisor = 1f;
     public float ResistanceModifier { private set; get; }
 
     [Header("Inventory")]
@@ -108,7 +115,7 @@ public class Player : MonoBehaviour
     {
         if (_isDashing || _isPlayerDead) { return; }
 
-        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * (_speed + SpeedModifier/_speedModifierDivisor), _rigidbody.linearVelocityY); //Player movement
+        _rigidbody.linearVelocity = new Vector2(_horizontalDirection * Mathf.Max(_speed + SpeedModifier/_speedModifierDivisor, _minSpeed), _rigidbody.linearVelocityY); //Player movement
     }
 
     private void ResetStats()
@@ -123,7 +130,7 @@ public class Player : MonoBehaviour
         _canAttack = true;
 
         _speed = _normalSpeed;
-        _currentHealth = _maxHealth = _baseMaxHeath + HealthModifier;
+        _currentHealth = _maxHealth = _baseMaxHeath + Mathf.Max(HealthModifier,_minHealth - _baseMaxHeath);
     }
 
 
@@ -157,7 +164,7 @@ public class Player : MonoBehaviour
         _canDash = false;
         float originalGravity = _rigidbody.gravityScale;
         _rigidbody.gravityScale = 0f; //Makes gravity unable to affect the Dash
-        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * (_dashSpeed + SpeedModifier/_speedModifierDivisor), 0f); //Dashing Speed
+        _rigidbody.linearVelocity = new Vector2(transform.localScale.x * Mathf.Max(_dashSpeed + SpeedModifier/_speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
 
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
@@ -176,8 +183,8 @@ public class Player : MonoBehaviour
 
         foreach (Collider2D _enemy in _hitEnemies)
         {
-            Debug.Log(_enemy.name + " is hit for " + (_attackDamage + DamageModifier) + " damage"); //Logic for dealing damage
-            _enemy.GetComponent<EnemyHealth>().TakeDamage(_attackDamage + DamageModifier, transform);
+            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
         }
 
         yield return new WaitForSeconds(_attackCooldown);
@@ -191,13 +198,15 @@ public class Player : MonoBehaviour
 
         Debug.Log($"Player took {_damageTaken} dmg");
 
-        float resistanceCalculation = (_baseResistance + ResistanceModifier) / 100f;
+        float resistanceCalculation = Mathf.Max(_baseResistance + ResistanceModifier/_resistanceModDivisor, _minResistance) / 100f;
         if (resistanceCalculation > 0.9f)
         {
             resistanceCalculation = 0.9f;
         }
 
         _currentHealth -= _damageTaken * (1 - resistanceCalculation);
+
+
         StartCoroutine(InvincibleTimer());
 
         if (_currentHealth <= 0)
@@ -257,15 +266,25 @@ public class Player : MonoBehaviour
 
     public void AddHealth(float _modValue)
     {
+        _modValue /= _healthModDivisor;
         HealthModifier += _modValue;
+
         if (_modValue < 0)
         {
             _maxHealth += _modValue;
+            if (_currentHealth > _maxHealth)
+            {
+                _currentHealth = _maxHealth;
+            }
         }
         else
         {
             _maxHealth += _modValue;
             _currentHealth += _modValue;
+        }
+        if (_maxHealth < _minHealth)
+        {
+            _currentHealth = _maxHealth = _minHealth;
         }
     }
 

@@ -392,7 +392,8 @@ MonoBehaviour:
   _attackRange: 3
   _dashPower: 10
   _dashDuration: 1
-  _patrolPoints: []
+  _patrolPoints:
+  - {fileID: 0}
   _rb: {fileID: 3876801432103470248}
   _player: {fileID: 0}
   _groundCheck: {fileID: 6659219911124193264}
