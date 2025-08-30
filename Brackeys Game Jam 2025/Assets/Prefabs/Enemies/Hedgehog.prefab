@@ -102,7 +102,7 @@ MonoBehaviour:
   _player: {fileID: 0}
   _groundCheck: {fileID: 4170713947529591388}
   _dustVFX: {fileID: 4457341843404744754}
-  _enemyAtkAnim: {fileID: 2162325911018052534}
+  _enemyAtkAnim: {fileID: 0}
   _currentState: 0
   _isStunned: 0
   grounded: 0
@@ -354,8 +354,6 @@ GameObject:
   - component: {fileID: 5786352302647065201}
   - component: {fileID: 2929692904356751458}
   - component: {fileID: 1971362624660559860}
-  - component: {fileID: 3241670546456407658}
-  - component: {fileID: 2162325911018052534}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -455,34 +453,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3241670546456407658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8785165155967885873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cacd0ae3d6eb294e804fbc6fba06892, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemy: {fileID: 1416326536052792970}
-  _animator: {fileID: 1971362624660559860}
-  _rb: {fileID: 5040413885406760340}
---- !u!114 &2162325911018052534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8785165155967885873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2b3a6865e5dc01546a7ca22fc9fa9ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animator: {fileID: 1971362624660559860}
 --- !u!1001 &7370648826954324171
 PrefabInstance:
   m_ObjectHideFlags: 0
