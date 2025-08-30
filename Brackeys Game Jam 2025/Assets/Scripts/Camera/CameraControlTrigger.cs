@@ -21,11 +21,11 @@ public class CameraControlTrigger : MonoBehaviour
         {
             UnityEngine.Vector2 exitDirection = (collision.transform.position - _coll.bounds.center).normalized;
 
-            if (customInspectorObjects.swapCameras && customInspectorObjects.cameraOnLeft != null && customInspectorObjects.cameraOnRight != null)
+            if (customInspectorObjects.swapCameras && customInspectorObjects.cameraFromRight != null && customInspectorObjects.cameraFromLeft != null)
             {
                 // swap cameras
                 Debug.Log("switching cameras");
-                CameraManager.instance.SwapCamera(customInspectorObjects.cameraOnLeft, customInspectorObjects.cameraOnRight, exitDirection);
+                CameraManager.instance.SwapCamera(customInspectorObjects.cameraFromRight, customInspectorObjects.cameraFromLeft, exitDirection);
             }
 
             if (customInspectorObjects.panCameraOnContact)
@@ -55,8 +55,8 @@ public class CustomInspectorObjects
     public bool swapCameras = false;
     public bool panCameraOnContact = false;
 
-    [HideInInspector] public CinemachineCamera cameraOnLeft;
-    [HideInInspector] public CinemachineCamera cameraOnRight;
+    [HideInInspector] public CinemachineCamera cameraFromLeft;
+    [HideInInspector] public CinemachineCamera cameraFromRight;
 
     [HideInInspector] public PanDirection panDirection;
     [HideInInspector] public float panDistance = 3f;
@@ -80,8 +80,8 @@ public class MyScriptEditor : Editor
     SerializedProperty customInspectorObjects;
     SerializedProperty swapCameras;
     SerializedProperty panCameraOnContact;
-    SerializedProperty cameraOnLeft;
-    SerializedProperty cameraOnRight;
+    SerializedProperty cameraFromRight;
+    SerializedProperty cameraFromLeft;
     SerializedProperty panDirection;
     SerializedProperty panDistance;
     SerializedProperty panTime;
@@ -91,8 +91,8 @@ public class MyScriptEditor : Editor
         customInspectorObjects = serializedObject.FindProperty("customInspectorObjects");
         swapCameras = customInspectorObjects.FindPropertyRelative("swapCameras");
         panCameraOnContact = customInspectorObjects.FindPropertyRelative("panCameraOnContact");
-        cameraOnLeft = customInspectorObjects.FindPropertyRelative("cameraOnLeft");
-        cameraOnRight = customInspectorObjects.FindPropertyRelative("cameraOnRight");
+        cameraFromRight = customInspectorObjects.FindPropertyRelative("cameraFromRight");
+        cameraFromLeft = customInspectorObjects.FindPropertyRelative("cameraFromLeft");
         panDirection = customInspectorObjects.FindPropertyRelative("panDirection");
         panDistance = customInspectorObjects.FindPropertyRelative("panDistance");
         panTime = customInspectorObjects.FindPropertyRelative("panTime");
@@ -107,8 +107,8 @@ public class MyScriptEditor : Editor
 
         if (swapCameras.boolValue)
         {
-            EditorGUILayout.PropertyField(cameraOnLeft);
-            EditorGUILayout.PropertyField(cameraOnRight);
+            EditorGUILayout.PropertyField(cameraFromLeft);
+            EditorGUILayout.PropertyField(cameraFromRight);
         }
 
         if (panCameraOnContact.boolValue)

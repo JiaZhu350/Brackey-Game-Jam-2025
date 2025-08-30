@@ -3018,13 +3018,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 7230525035553865530}
   _uiController: {fileID: 7980508192687395011}
+  _cameraFollow: {fileID: 0}
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
   _normalSpeed: 5
   _speedModifierDivisor: 1
+  _minSpeed: 2.5
   _raycastLength: 2
-  _jumpForce: 500
+  _jumpForce: 600
   _dashCooldown: 3
   _dashTime: 0.2
   _dashSpeed: 20
@@ -3035,11 +3037,18 @@ MonoBehaviour:
   _baseMaxHeath: 500
   _invincibleCooldown: 0
   _currentHealth: 0
+  _minHealth: 50
+  _healthModDivisor: 1
   _attackDamage: 10
   _attackRadius: 0.8
   _attackCooldown: 0.4
+  _minDamage: 5
+  _damageModDivisor: 1
   _baseResistance: 0
+  _minResistance: -30
+  _resistanceModDivisor: 1
   _biscuitAmount: 0
+  _isFacingRight: 0
 --- !u!1 &6554881790170328318
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class CameraManager : MonoBehaviour
 
     [SerializeField] private CinemachineCamera[] _allVirtualCameras;
 
-    [Header("controls for lerping the Y Damping during player jump/fall")]
+    [Header("Controls for lerping the Y Damping during player jump/fall")]
     [SerializeField] private float _fallPanAmount = 0.25f;
     [SerializeField] private float _fallYPanTime = 0.35f;
     public float _fallSpeedYDampingChangeThreshold = -15f;
@@ -166,7 +166,6 @@ public class CameraManager : MonoBehaviour
         // if the current camera is the camera on the left and our trigger exit direction was on the right
         if (_currentCamera == cameraFromLeft && triggerExitDirection.x > 0f)
         {
-            Debug.Log("switched camera from left to right");
             // activate the new camera
             cameraFromRight.enabled = true;
 
@@ -182,7 +181,6 @@ public class CameraManager : MonoBehaviour
         // if the current camera is the camera on the right and our trigger exit direction was on the left
         else if (_currentCamera == cameraFromRight && triggerExitDirection.x < 0f)
         {
-            Debug.Log("switched camera from right to left");
             // activate the new camera
             cameraFromLeft.enabled = true;
 
