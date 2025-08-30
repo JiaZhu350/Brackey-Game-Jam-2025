@@ -394,8 +394,8 @@ MonoBehaviour:
   _dashDuration: 1
   _audioRange: 5
   _audioVolume: 0.5
-  _idleAudio: {fileID: 8300000, guid: 8a152120e4418c34fabb01502bfb2aae, type: 3}
-  _followAudio: {fileID: 8300000, guid: 8a152120e4418c34fabb01502bfb2aae, type: 3}
+  _idleAudio: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
+  _followAudio: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
   _attackAudio: {fileID: 8300000, guid: ce7b1446b74604b43b2d7ad457dc057f, type: 3}
   _patrolPoints:
   - {fileID: 0}
