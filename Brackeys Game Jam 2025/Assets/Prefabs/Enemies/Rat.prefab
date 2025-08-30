@@ -314,6 +314,11 @@ MonoBehaviour:
   _attackRange: 0.9
   _dashPower: 0
   _dashDuration: 0
+  _audioRange: 8
+  _audioVolume: 0.5
+  _idleAudio: {fileID: 8300000, guid: 1cccfd3b9b93ea74f9bd8cbccdd90598, type: 3}
+  _followAudio: {fileID: 8300000, guid: 1cccfd3b9b93ea74f9bd8cbccdd90598, type: 3}
+  _attackAudio: {fileID: 0}
   _patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
