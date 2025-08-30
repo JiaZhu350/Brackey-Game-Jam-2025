@@ -25,7 +25,7 @@ public class MeleeAttack : IAttack
         }
         isAttacking = true;
         _atkAnim.StartAttack();
-        if (_atkSound != null) SoundFXManager.instance.PlaySoundFXClip(_atkSound, rb.transform, _volume);
+        if (_atkSound != null) SoundFXManager.instance.PlaySoundFXClip(_atkSound, rb.transform, _volume, regulated: false);
         // Wind-up
         yield return new WaitForSeconds(windup);
 

@@ -1288,6 +1288,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4895341107473686761, guid: f09205d0904a1db4e84536321b4eb213, type: 3}
+      propertyPath: _idleAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
+    - target: {fileID: 4895341107473686761, guid: f09205d0904a1db4e84536321b4eb213, type: 3}
+      propertyPath: _followAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 46aaf3f9a31c31449a0c8511be52edd4, type: 3}
+    - target: {fileID: 4895341107473686761, guid: f09205d0904a1db4e84536321b4eb213, type: 3}
       propertyPath: _patrolPoints.Array.size
       value: 0
       objectReference: {fileID: 0}

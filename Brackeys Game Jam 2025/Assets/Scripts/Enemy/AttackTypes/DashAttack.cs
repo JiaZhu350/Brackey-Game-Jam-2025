@@ -47,7 +47,7 @@ public class DashAttack : IAttack
         _isAttacking = true;
         _atkAnim.StartAttack();
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
-        if (_atkSound != null) SoundFXManager.instance.PlaySoundFXClip(_atkSound, rb.transform, _volume);
+        if (_atkSound != null) SoundFXManager.instance.PlaySoundFXClip(_atkSound, rb.transform, _volume, regulated: false);
 
         // Wind-up
         yield return new WaitForSeconds(windup);

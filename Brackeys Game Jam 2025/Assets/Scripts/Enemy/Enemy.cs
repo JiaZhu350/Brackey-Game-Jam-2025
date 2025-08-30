@@ -144,6 +144,7 @@ public class Enemy : MonoBehaviour
     {
         if (_movement == null) return;
         if (_patrolPoints == null || _patrolPoints.Length == 0) return; // no points to patrol
+        if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume / 2);
         Transform targetPoint = _patrolPoints[_patrolIndex];
         _movement.MoveToward(targetPoint.position, _patrolSpeed, _acceleration, _rb);
 
@@ -168,6 +169,7 @@ public class Enemy : MonoBehaviour
         if (_attack != null)
         {
             if (!_attack.rbRestricted && _movement != null) _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
+            if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume);
             StartCoroutine(_attack.AttackPlayer(_player, _atkDamage, _atkWindup, _atkCd, _rb));
         }
         else Idle();
