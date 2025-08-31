@@ -9,8 +9,8 @@ public class BossDoorTrigger : MonoBehaviour
         if (collision.CompareTag("Player") && _door != null)
         {
             _door.enabled = true;
-            Player player = GetComponent<Player>();
-            player._canTeleport = false;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            player.GetComponent<Player>()._canTeleport = false;
         }
     }
 }
