@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private UIController _uiController;
+    [SerializeField] private PlayerAnimation _playerAnimation;
 
     [Header("Camera Stuff")]
     [SerializeField] private GameObject _cameraFollow;
@@ -251,9 +252,13 @@ public class Player : MonoBehaviour
             _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier / _speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
         }
 
+        _playerAnimation.StartDash();
+
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
         _isDashing = false;
+
+        _playerAnimation.StopDash();
 
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
@@ -272,6 +277,8 @@ public class Player : MonoBehaviour
             _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
         }
 
+        _playerAnimation.StartAttackAnimation();
+
         yield return new WaitForSeconds(_attackCooldown);
 
         _canAttack = true;
@@ -282,6 +289,8 @@ public class Player : MonoBehaviour
         if (_isInvincible){ return; }
 
         Debug.Log($"Player took {_damageTaken} dmg");
+
+        _playerAnimation.PlayerHurt();
 
         float resistanceCalculation = Mathf.Max(_baseResistance + ResistanceModifier/_resistanceModDivisor, _minResistance) / 100f;
         if (resistanceCalculation > 0.9f)
