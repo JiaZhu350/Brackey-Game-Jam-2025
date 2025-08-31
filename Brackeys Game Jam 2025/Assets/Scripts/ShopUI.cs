@@ -41,7 +41,7 @@ public class ShopUI : MonoBehaviour
 
     private void Awake()
     {
-        //_container.SetActive(false);
+        _container.SetActive(false);
     }
 
     private void Start()
