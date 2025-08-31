@@ -6,6 +6,7 @@ public class PlayerAnimation : MonoBehaviour
     [SerializeField] private Animator _anim;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Player _player;
+    [SerializeField] private ParticleSystem _dustVFX;
 
     private void Update()
     {
@@ -17,6 +18,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         if (Mathf.Abs(_rb.linearVelocity.x) >= 0.1f)
         {
+            if (_player.IsGrounded()) _dustVFX.Play();
             _anim.SetBool("isWalking", true);
         }
         else
@@ -37,6 +39,11 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
+    public void PlayDustVFX()
+    {
+        _dustVFX.Play();
+    }
+
     public void StartAttackAnimation()
     {
         _anim.SetTrigger("isAttacking");
@@ -44,6 +51,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void StartDash()
     {
+        if (_player.IsGrounded()) _dustVFX.Play();
         _anim.SetBool("isDashing", true);
     }
 

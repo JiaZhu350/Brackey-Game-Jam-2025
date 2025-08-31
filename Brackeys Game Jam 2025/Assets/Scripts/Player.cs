@@ -241,6 +241,7 @@ public class Player : MonoBehaviour
 
     private void PlayerJump()
     {
+        _playerAnimation.PlayDustVFX();
         _rigidbody.linearVelocityY = 0f; // Reset the linear Y velocity to allow for better jumping logic
         _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
     }
