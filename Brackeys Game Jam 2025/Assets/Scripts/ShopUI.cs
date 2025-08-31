@@ -149,6 +149,7 @@ public class ShopUI : MonoBehaviour
             _player.ModifyBiscuit(-1 * _itemPrice);
             _currentlySelectedItem.ApplyStats();
             UpdatePlayerBiscuitCounter();
+            ExitShop();
         }
     }
 
@@ -170,6 +171,7 @@ public class ShopUI : MonoBehaviour
             _player.ModifyBiscuit(-1 * _itemPrice);
             _currentlySelectedItem.ApplyRiskStats();
             UpdatePlayerBiscuitCounter();
+            ExitShop();
         }
     }
 
