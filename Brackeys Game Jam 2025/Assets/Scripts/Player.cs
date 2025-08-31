@@ -60,8 +60,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseMaxHealth;
     [SerializeField] private float _invincibleCooldown;
     // private float _maxHealth;
-    public float _maxHealth;
+    [SerializeField] private float _maxHealth;
+    [HideInInspector] public float GetMaxHealth => _maxHealth;
     [SerializeField] private float _currentHealth;
+    [HideInInspector] public float GetCurrentHealth => _currentHealth;
     [SerializeField] private float _minHealth = 50.0f;
     [SerializeField] private float _healthModDivisor = 1f;
     private bool _isInvincible;
