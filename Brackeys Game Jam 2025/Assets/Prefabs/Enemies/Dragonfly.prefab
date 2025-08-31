@@ -300,8 +300,8 @@ MonoBehaviour:
   _biscuitsAmount: 70
   _knockbackAmount: 10
   _knockbackDuration: 1
-  _isBoss: 0
-  _speedMultiplier: 1
+  _isBoss: 1
+  _speedMultiplier: 2
   _attackSpeedMultiplier: 1
   _damageMultiplier: 1
   _hasBoost: 0
@@ -324,7 +324,7 @@ MonoBehaviour:
   _movementType: 1
   _patrolSpeed: 7
   _chaseSpeed: 6
-  _acceleration: 3
+  _acceleration: 5
   _deceleration: 10
   _detectionRange: 20
   _stoppingDistance: 0.2
@@ -335,7 +335,7 @@ MonoBehaviour:
   _jumpCd: 1
   _attackType: 0
   _atkDamage: 20
-  _atkWindup: 0.5
+  _atkWindup: 1
   _atkCd: 3
   _attackRange: 2
   _dashPower: 0
