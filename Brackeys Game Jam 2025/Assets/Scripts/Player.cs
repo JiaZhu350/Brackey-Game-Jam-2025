@@ -23,12 +23,12 @@ public class Player : MonoBehaviour
 
 
     [Header("Movement Logic")]
-    [SerializeField] private float _normalSpeed;
+    [SerializeField] private float _baseSpeed;
     [SerializeField] private float _speedModifierDivisor = 1f;
     [SerializeField] private float _minSpeed = 2.5f;
     private float _horizontalDirection;
     private float _speed;
-    public float SpeedModifier { private set; get; }
+    public float SpeedModifier; //{ private set; get; }
 
 
     [Header("Jump Logic")]
@@ -56,31 +56,32 @@ public class Player : MonoBehaviour
 
 
     [Header("Health")]
-    [SerializeField] private float _baseMaxHeath;
+    [SerializeField] private float _baseMaxHealth;
     [SerializeField] private float _invincibleCooldown;
-    private float _maxHealth;
+    // private float _maxHealth;
+    public float _maxHealth;
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _minHealth = 50.0f;
     [SerializeField] private float _healthModDivisor = 1f;
     private bool _isInvincible;
-    public float HealthModifier { private set; get; } // Reference to modified max health rather than current health
+    public float HealthModifier; //{ private set; get; } // Reference to modified max health rather than current health
 
 
     [Header("Attack")]
-    [SerializeField] private float _attackDamage;
+    [SerializeField] private float _baseAttackDamage;
     [SerializeField] private float _attackRadius;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private float _minDamage = 5f;
     [SerializeField] private float _damageModDivisor = 1f;
     private bool _canAttack;
-    public float DamageModifier { private set; get; }
+    public float DamageModifier; //{ private set; get; }
 
 
     [Header("Resistance")]
     [SerializeField] private float _baseResistance;
     [SerializeField] private float _minResistance = -30f;
     [SerializeField] private float _resistanceModDivisor = 1f;
-    public float ResistanceModifier { private set; get; }
+    public float ResistanceModifier; //{ private set; get; }
 
     [Header("Inventory")]
     [SerializeField] private int _biscuitAmount = 0;
@@ -179,8 +180,8 @@ public class Player : MonoBehaviour
         _canAttack = true;
         _canDoubleJump = false;
 
-        _speed = _normalSpeed;
-        _currentHealth = _maxHealth = _baseMaxHeath + Mathf.Max(HealthModifier, _minHealth - _baseMaxHeath);
+        _speed = _baseSpeed;
+        _currentHealth = _maxHealth = _baseMaxHealth + Mathf.Max(HealthModifier, _minHealth - _baseMaxHealth);
     }
 
 
@@ -267,8 +268,8 @@ public class Player : MonoBehaviour
 
         foreach (Collider2D _enemy in _hitEnemies)
         {
-            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
-            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
+            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
         }
 
         yield return new WaitForSeconds(_attackCooldown);
