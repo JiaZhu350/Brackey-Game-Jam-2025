@@ -1,7 +1,6 @@
 using System.Numerics;
 using Unity.Cinemachine;
 using UnityEditor;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class CameraControlTrigger : MonoBehaviour
