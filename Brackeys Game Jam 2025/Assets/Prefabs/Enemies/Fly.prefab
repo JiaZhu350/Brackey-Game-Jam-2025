@@ -269,9 +269,15 @@ MonoBehaviour:
   _biscuitsAmount: 15
   _knockbackAmount: 10
   _knockbackDuration: 0.7
+  _isBoss: 0
+  _speedMultiplier: 1
+  _attackSpeedMultiplier: 1
+  _damageMultiplier: 1
+  _hasBoost: 0
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 2049454628696338870}
   _animator: {fileID: 5438121138873552278}
+  _deathFX: {fileID: 3801937764747849660, guid: 545dbe44b1dde2c42b7f4c14edcf1f12, type: 3}
 --- !u!1 &7809617341547497549
 GameObject:
   m_ObjectHideFlags: 0

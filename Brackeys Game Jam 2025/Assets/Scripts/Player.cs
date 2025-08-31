@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private UIController _uiController;
     [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private EndScreens _endScreen;
 
     [Header("Camera Stuff")]
     [SerializeField] private GameObject _cameraFollow;
@@ -347,8 +348,14 @@ public class Player : MonoBehaviour
     private void PlayDeath()
     {
         _isPlayerDead = true;
+        _endScreen.PlayerLose(_biscuitAmount);
         Debug.Log("Player died");
         // Player Death Animation
+    }
+
+    public void PlayerWin()
+    {
+        _endScreen.PlayerWin(_biscuitAmount);
     }
 
     public void ModifyBiscuit(int amount)
