@@ -285,6 +285,11 @@ public class Player : MonoBehaviour
         _canDash = true;
     }
 
+    public float GetPlayerMoveSpeed()
+    {
+        return Mathf.Max(_speed + SpeedModifier / _speedModifierDivisor, _minSpeed);
+    }
+
 
     //Combat Systems
     private IEnumerator Attacking()
@@ -294,8 +299,8 @@ public class Player : MonoBehaviour
 
         foreach (Collider2D _enemy in _hitEnemies)
         {
-            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
-            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
+            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_baseAttackDamage + DamageModifier / _damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_baseAttackDamage + DamageModifier / _damageModDivisor, _minDamage), transform);
         }
 
         _playerAnimation.StartAttackAnimation();
@@ -305,15 +310,20 @@ public class Player : MonoBehaviour
         _canAttack = true;
     }
 
+    public float GetPlayerDamage()
+    {
+        return Mathf.Max(_baseAttackDamage + DamageModifier / _damageModDivisor, _minDamage);
+    }
+
     public void TakeDamage(float _damageTaken)
     {
-        if (_isInvincible){ return; }
+        if (_isInvincible) { return; }
 
         Debug.Log($"Player took {_damageTaken} dmg");
 
         _playerAnimation.PlayerHurt();
 
-        float resistanceCalculation = Mathf.Max(_baseResistance + ResistanceModifier/_resistanceModDivisor, _minResistance) / 100f;
+        float resistanceCalculation = Mathf.Max(_baseResistance + ResistanceModifier / _resistanceModDivisor, _minResistance) / 100f;
         if (resistanceCalculation > 0.9f)
         {
             resistanceCalculation = 0.9f;
@@ -328,6 +338,11 @@ public class Player : MonoBehaviour
         {
             PlayDeath();
         }
+    }
+
+    public float GetResistance()
+    {
+        return Mathf.Max(_baseResistance + ResistanceModifier / _resistanceModDivisor, _minResistance);
     }
 
     public void PlayerHeal(float _amountHealed)
