@@ -8,7 +8,7 @@ public class WinCondition : MonoBehaviour
     private bool _canReadyToCashOut = false;
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.eKey.wasPressedThisFrame && _canReadyToCashOut)
         {
             _player.PlayerWin();
         }
