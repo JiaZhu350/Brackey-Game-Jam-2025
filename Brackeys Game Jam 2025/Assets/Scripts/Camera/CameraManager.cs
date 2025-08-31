@@ -22,7 +22,7 @@ public class CameraManager : MonoBehaviour
     private Coroutine _lerpYPanCoroutine;
     private Coroutine _panCameraCoroutine;
 
-    private CinemachineCamera _currentCamera;
+    public CinemachineCamera _currentCamera;
     private CinemachinePositionComposer _positionComposer;
 
     private float _normYPanAmount;

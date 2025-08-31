@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -16,6 +17,11 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _cameraFollow;
     private CameraFollowObject _cameraFollowObject;
     private float _fallSpeedYDampingChangeThreshold;
+
+    [Header("Teleport Stuff")]
+    [SerializeField] private Transform _teleportLocation;
+    [SerializeField] private CinemachineCamera _teleportLocationCamera;
+    public bool _canTeleport = true;
 
 
     //Movement Stats
@@ -60,8 +66,10 @@ public class Player : MonoBehaviour
     [SerializeField] private float _baseMaxHealth;
     [SerializeField] private float _invincibleCooldown;
     // private float _maxHealth;
-    public float _maxHealth;
+    [SerializeField] private float _maxHealth;
+    [HideInInspector] public float GetMaxHealth => _maxHealth;
     [SerializeField] private float _currentHealth;
+    [HideInInspector] public float GetCurrentHealth => _currentHealth;
     [SerializeField] private float _minHealth = 50.0f;
     [SerializeField] private float _healthModDivisor = 1f;
     private bool _isInvincible;
@@ -139,6 +147,20 @@ public class Player : MonoBehaviour
             StartCoroutine(Dashing());
         }
 
+        // teleport Player to teleport location and change their camera
+        if (Keyboard.current.tKey.wasPressedThisFrame && _canTeleport && IsGrounded())
+        {
+            if (_teleportLocation == null || _teleportLocationCamera == null)
+            {
+                return;
+            }
+
+            transform.position = _teleportLocation.position;
+            CameraManager.instance._currentCamera.enabled = false;
+            _teleportLocationCamera.enabled = true;
+            CameraManager.instance._currentCamera = _teleportLocationCamera;
+        }
+
         if (Mouse.current.leftButton.isPressed && _canAttack)
         {
             StartCoroutine(Attacking());
@@ -209,8 +231,6 @@ public class Player : MonoBehaviour
                 _cameraFollowObject.CallTurn();
             }
             _isFacingRight = !_isFacingRight;
-            // localScale.x *= -1f;
-            // transform.localScale = localScale;
         }
     }
 
