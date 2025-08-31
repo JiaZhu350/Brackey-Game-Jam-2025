@@ -22,7 +22,7 @@ public class SoundFXManager : MonoBehaviour
 
     private void Start()
     {
-        PlaySoundFXClip(_themeMusic, transform, 1, true);
+        PlayThemeMusic(_themeMusic, 1);
     }
 
     public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, bool loop = false, bool regulated = true)
@@ -52,6 +52,14 @@ public class SoundFXManager : MonoBehaviour
         audioSource.Play();
         float clipLength = audioSource.clip.length;
         Destroy(audioSource.gameObject, clipLength);
+    }
+
+    private void PlayThemeMusic(AudioClip music, float volume)
+    {
+        _themeAudioSource.clip = music;
+        _themeAudioSource.volume = volume;
+        _themeAudioSource.loop = true;
+        _themeAudioSource.Play();
     }
 
     private IEnumerator RemoveAudioClip(AudioClip clip, float delay)

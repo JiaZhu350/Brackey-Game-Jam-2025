@@ -93,6 +93,7 @@ MonoBehaviour:
   _themeMusic: {fileID: 8300000, guid: 3a0a734d69f36d14486dc1e26c14421b, type: 3}
   soundFXObject: {fileID: 1272824168438751880, guid: 0c8dfeb503ea22843acaa8d48fdac66b, type: 3}
   _themeAudioSource: {fileID: 7733273564408625413}
+  _currentSFX: []
 --- !u!82 &7733273564408625413
 AudioSource:
   m_ObjectHideFlags: 0
@@ -105,7 +106,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

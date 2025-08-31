@@ -3228,8 +3228,8 @@ MonoBehaviour:
   _playerAnimation: {fileID: 4733889561429004608}
   _cameraFollow: {fileID: 0}
   _groundCheck: {fileID: 7709846095182238008}
-  _baseSpeed: 2.5
-  _speedModifierDivisor: 1
+  _baseSpeed: 5
+  _speedModifierDivisor: 4
   _minSpeed: 2.5
   SpeedModifier: 0
   _jumpForce: 12
@@ -3244,21 +3244,21 @@ MonoBehaviour:
   _whatIsEnemy:
     serializedVersion: 2
     m_Bits: 128
-  _baseMaxHealth: 500
-  _invincibleCooldown: 0
+  _baseMaxHealth: 100
+  _invincibleCooldown: 1
   _maxHealth: 0
   _currentHealth: 0
-  _minHealth: 50
+  _minHealth: 20
   _healthModDivisor: 1
   HealthModifier: 0
-  _baseAttackDamage: 10
+  _baseAttackDamage: 25
   _attackRadius: 0.8
   _attackCooldown: 0.4
   _minDamage: 5
   _damageModDivisor: 1
   DamageModifier: 0
-  _baseResistance: 0
-  _minResistance: -30
+  _baseResistance: 10
+  _minResistance: -50
   _resistanceModDivisor: 1
   ResistanceModifier: 0
   _biscuitAmount: 0

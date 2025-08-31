@@ -77,7 +77,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 849121137
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -3578019587575532720, guid: d09385256e1f1d44386363ee1d343394, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -308,7 +308,7 @@ MonoBehaviour:
   _jumpForce: 8
   _jumpCd: 1
   _attackType: 0
-  _atkDamage: 15
+  _atkDamage: 20
   _atkWindup: 0.3
   _atkCd: 2
   _attackRange: 0.9
@@ -388,9 +388,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
+  _maxHp: 20
   _currentHp: 0
-  _biscuitsAmount: 10
+  _biscuitsAmount: 15
   _knockbackAmount: 20
   _knockbackDuration: 0.7
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
