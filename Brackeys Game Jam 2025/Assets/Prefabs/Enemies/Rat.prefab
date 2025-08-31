@@ -308,7 +308,7 @@ MonoBehaviour:
   _jumpForce: 8
   _jumpCd: 1
   _attackType: 0
-  _atkDamage: 20
+  _atkDamage: 10
   _atkWindup: 0.3
   _atkCd: 2
   _attackRange: 0.9
@@ -398,6 +398,8 @@ MonoBehaviour:
   _attackSpeedMultiplier: 1
   _damageMultiplier: 1
   _hasBoost: 0
+  _biscuitSpawn: {fileID: 0}
+  _shopItems: []
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 2770534485625981825}
   _animator: {fileID: 2591131876496460896}

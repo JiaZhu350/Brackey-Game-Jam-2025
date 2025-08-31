@@ -179,6 +179,8 @@ MonoBehaviour:
   _attackSpeedMultiplier: 1
   _damageMultiplier: 1
   _hasBoost: 0
+  _biscuitSpawn: {fileID: 0}
+  _shopItems: []
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 5040413885406760340}
   _animator: {fileID: 1971362624660559860}
@@ -352,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7714b205b4366d2448ea4c35ce99e575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 15
+  _damage: 7
   _cooldown: 1
 --- !u!1 &8785165155967885873
 GameObject:
