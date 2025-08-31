@@ -5,23 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ScriptableItems", menuName = "Scriptable Objects/ScriptableItems")]
 public class ScriptableItems : ScriptableObject
 {
-    private enum PlayerStatMod { Speed, Health, Attack, Resistance, None }
+    private enum PlayerStatMod { Speed, Health, Damage, Resistance, None }
     private enum RiskType { Normal, AllIn}
 
 
     [Header("Item Functionality")]
-    [SerializeField] private PlayerStatMod _statModIncrease;
-    [SerializeField] private PlayerStatMod _statModDecrease;
+    [SerializeField] private PlayerStatMod _baseStat1;
+    [SerializeField] private PlayerStatMod _baseStat2;
     [SerializeField] private RiskType _riskLevel;
-    [SerializeField] private float _statIncreaseAmount;
-    public float StatIncreaseAmount => _statIncreaseAmount;
-    [SerializeField] private float _statDecreaseAmount;
-    public float StatDecreaseAmount => _statDecreaseAmount;
+    [SerializeField] private float _baseStat1IncreaseAmount;
+    public float Stat1IncreaseAmount => _baseStat1IncreaseAmount;
+    [SerializeField] private float _baseStat2IncreaseAmount;
+    public float Stat2IncreaseAmount => _baseStat2IncreaseAmount;
     [SerializeField] private int _normalRiskCostReduction; //Does not affect all ins
-    [SerializeField] private float _riskUpperLimit;
-    [SerializeField] private float _riskLowerLimit;
+    [SerializeField] private float _stat1UpperRange;
+    [SerializeField] private float _stat1LowerRange;
+    [SerializeField] private float _stat2UpperRange;
+    [SerializeField] private float _stat2LowerRange;
     private Player _player;
-    private PlayerStatMod _statRisked;
 
 
     [Header("Item Components")]
@@ -42,13 +43,15 @@ public class ScriptableItems : ScriptableObject
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
-        IncreaseStats(_statIncreaseAmount);
-        DecreaseStats(-1f * _statDecreaseAmount);
+        ChangeStats(_baseStat1, Stat1IncreaseAmount);
+        ChangeStats(_baseStat2, Stat2IncreaseAmount);
     }
 
-    private void IncreaseStats(float _amountAltered)
+    private void ChangeStats(PlayerStatMod statMod, float _amountAltered)
     {
-        switch (_statModIncrease)
+        Debug.Log(statMod);
+        Debug.Log(_amountAltered);
+        switch (statMod)
         {
             case PlayerStatMod.Speed:
                 //Alter player speed
@@ -58,37 +61,12 @@ public class ScriptableItems : ScriptableObject
                 //Alter player health
                 _player.AddHealth(_amountAltered);
                 break;
-            case PlayerStatMod.Attack:
+            case PlayerStatMod.Damage:
                 //Alter Player Damage
                 _player.AddDamage(_amountAltered);
                 break;
             case PlayerStatMod.Resistance:
-                //Alter Player Reistance
-                _player.AddResistance(_amountAltered);
-                break;
-            case PlayerStatMod.None:
-                break;
-        }
-    }
-
-    private void DecreaseStats(float _amountAltered)
-    {
-        switch (_statModDecrease)
-        {
-            case PlayerStatMod.Speed:
-                //Alter player speed
-                _player.AddSpeed(_amountAltered);
-                break;
-            case PlayerStatMod.Health:
-                //Alter player health
-                _player.AddHealth(_amountAltered);
-                break;
-            case PlayerStatMod.Attack:
-                //Alter Player Damage
-                _player.AddDamage(_amountAltered);
-                break;
-            case PlayerStatMod.Resistance:
-                //Alter Player Reistance
+                //Alter Player Resistance
                 _player.AddResistance(_amountAltered);
                 break;
             case PlayerStatMod.None:
@@ -135,39 +113,41 @@ public class ScriptableItems : ScriptableObject
 
     private void NormalRisk()
     {
-        _statRisked = (PlayerStatMod)Random.Range(0, System.Enum.GetValues(typeof(PlayerStatMod)).Length - 1);
-        RiskedStatMod();
+        RiskedStatMod(_baseStat1, _stat1LowerRange, _stat1UpperRange);
+        RiskedStatMod(_baseStat2, _stat2LowerRange, _stat2UpperRange);
     }
 
     private void RiskAll() //Risk all stats for massive discount
     {
-        for (int _loopAmount = 0; _loopAmount < 5; _loopAmount++)
+        for (int _loopAmount = 0; _loopAmount < 3; _loopAmount++)
         {
-            _statRisked = (PlayerStatMod)Random.Range(0, System.Enum.GetValues(typeof(PlayerStatMod)).Length - 1);
-            RiskedStatMod();
+            RiskedStatMod(_baseStat1, _stat1LowerRange, _stat1UpperRange);
+            RiskedStatMod(_baseStat2, _stat2LowerRange, _stat2UpperRange);
         }
     }
 
-    private void RiskedStatMod()
+    private void RiskedStatMod(PlayerStatMod statRisked, float lowerRange, float upperRange)
     {
-        float _modifyAmount = Mathf.Round(Random.Range(_riskLowerLimit, _riskUpperLimit));
-        //Debug.Log(_modifyAmount);
-        switch (_statRisked)
+        float _modifyAmount = Mathf.Round(Random.Range(lowerRange, upperRange));
+        switch (statRisked)
         {
             case PlayerStatMod.Speed:
                 //Alter player speed
+                Debug.Log(_modifyAmount);
+                Debug.Log(lowerRange);
+                Debug.Log(upperRange);
                 _player.AddSpeed(_modifyAmount);
                 break;
             case PlayerStatMod.Health:
                 //Alter player health
                 _player.AddHealth(_modifyAmount);
                 break;
-            case PlayerStatMod.Attack:
+            case PlayerStatMod.Damage:
                 //Alter Player Damage
                 _player.AddDamage(_modifyAmount);
                 break;
             case PlayerStatMod.Resistance:
-                //Alter Player Reistance
+                //Alter Player Resistance
                 _player.AddResistance(_modifyAmount);
                 break;
             case PlayerStatMod.None:
