@@ -119,7 +119,6 @@ public class Player : MonoBehaviour
         _horizontalDirection = Input.GetAxisRaw("Horizontal");
         SwitchGravityScale();
 
-        if (Keyboard.current.yKey.wasPressedThisFrame){ PlayerWin(); }
         if (IsGrounded())
         {
             _coyoteTimeCounter = _coyoteTime;
