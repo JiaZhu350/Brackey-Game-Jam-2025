@@ -308,6 +308,7 @@ MonoBehaviour:
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 1511297357609555385}
   _animator: {fileID: 6093182075506537851}
+  _deathFX: {fileID: 3801937764747849660, guid: 545dbe44b1dde2c42b7f4c14edcf1f12, type: 3}
 --- !u!114 &4681223960705842230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,6 +362,7 @@ MonoBehaviour:
   _specialAttackCd: 7
   _specialAcceleration: 20
   _specialSpeed: 10
+  _dmgCollision: {fileID: 0}
   _isPerformingSpecial: 0
   _currentCd: 0
 --- !u!1 &6275921064898546474

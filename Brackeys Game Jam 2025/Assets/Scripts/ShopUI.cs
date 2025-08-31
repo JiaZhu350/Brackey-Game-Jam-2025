@@ -41,7 +41,7 @@ public class ShopUI : MonoBehaviour
 
     private void Awake()
     {
-        //_container.SetActive(false);
+        _container.SetActive(false);
     }
 
     private void Start()
@@ -149,6 +149,7 @@ public class ShopUI : MonoBehaviour
             _player.ModifyBiscuit(-1 * _itemPrice);
             _currentlySelectedItem.ApplyStats();
             UpdatePlayerBiscuitCounter();
+            ExitShop();
         }
     }
 
@@ -170,6 +171,7 @@ public class ShopUI : MonoBehaviour
             _player.ModifyBiscuit(-1 * _itemPrice);
             _currentlySelectedItem.ApplyRiskStats();
             UpdatePlayerBiscuitCounter();
+            ExitShop();
         }
     }
 

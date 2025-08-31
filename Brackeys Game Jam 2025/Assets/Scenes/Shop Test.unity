@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 988445872}
   - component: {fileID: 988445871}
   m_Layer: 0
-  m_Name: Placeholder Camera Manager
+  m_Name: Camera Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -498,6 +498,7 @@ MonoBehaviour:
   _fallPanAmount: 0.25
   _fallYPanTime: 0.35
   _fallSpeedYDampingChangeThreshold: -10
+  _currentCamera: {fileID: 0}
 --- !u!4 &988445872
 Transform:
   m_ObjectHideFlags: 0
@@ -534,6 +535,10 @@ PrefabInstance:
     - target: {fileID: 1217342377923615544, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
       propertyPath: _biscuitAmount
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4362867641366169493, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6059910272673190339, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,6 +9,7 @@ public class DragonflyBoss : Enemy
     [SerializeField] private float _specialAttackCd = 5f;
     [SerializeField] private float _specialAcceleration = 20f;
     [SerializeField] private float _specialSpeed = 10f;
+    [SerializeField] private CollisionDamage _dmgCollision;
 
     [SerializeField] private bool _isPerformingSpecial = false;
     [SerializeField] private float _currentCd;
@@ -79,7 +80,15 @@ public class DragonflyBoss : Enemy
 
     protected override void HandleStates()
     {
-        if (_isPerformingSpecial) return;
+        if (_isPerformingSpecial)
+        {
+            _dmgCollision.enabled = true;
+            return;
+        }
+        else
+        {
+            _dmgCollision.enabled = false;
+        }
         base.HandleStates();
     }
 }
