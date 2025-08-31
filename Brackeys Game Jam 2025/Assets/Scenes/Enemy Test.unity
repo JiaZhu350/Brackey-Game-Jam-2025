@@ -1841,7 +1841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: _speedMultiplier
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: _damageMultiplier
@@ -1850,6 +1850,10 @@ PrefabInstance:
     - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: _attackSpeedMultiplier
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681223960705842230, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _acceleration
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4681223960705842230, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: '_xPoints.Array.data[0]'
