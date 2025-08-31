@@ -43,14 +43,7 @@ public class EnemyHealth : MonoBehaviour
         }
         if (_currentHp <= 0)
         {
-            Vector3 deathLocation = transform.position;
-            if (_biscuitSpawn != null)
-            {
-                deathLocation = _biscuitSpawn.position;
-            }
-            GameObject biscuitInstance = Instantiate(_biscuit, deathLocation, Quaternion.identity);
-            if (_deathFX != null) Instantiate(_deathFX, deathLocation, Quaternion.identity);
-            biscuitInstance.GetComponent<Collectables>().biscuits = _biscuitsAmount;
+            SpawnBiscuit();
             if (_isBoss)
             {
                 Player playerChar = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -60,6 +53,17 @@ public class EnemyHealth : MonoBehaviour
             }
             Die();
         }
+    }
+
+    private void SpawnBiscuit()
+    {
+        Vector3 deathLocation = transform.position;
+        if (_biscuitSpawn != null)
+        {
+            deathLocation = _biscuitSpawn.position;
+        }
+        GameObject biscuitInstance = Instantiate(_biscuit, deathLocation, Quaternion.identity);
+        if (_deathFX != null) Instantiate(_deathFX, deathLocation, Quaternion.identity);
     }
 
     private void Die()
