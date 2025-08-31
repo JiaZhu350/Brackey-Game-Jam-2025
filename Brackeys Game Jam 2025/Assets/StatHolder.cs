@@ -17,16 +17,16 @@ public class StatHolder : MonoBehaviour
 
     private void BuildingSpeed()
     {
-        _speedText.text = $"Player Speed: {Mathf.RoundToInt(_player.GetPlayerMoveSpeed())}";
+        _speedText.text = $"Speed: {Mathf.RoundToInt(_player.GetPlayerMoveSpeed())}";
     }
 
     private void BuildingAttack()
     {
-        _attackText.text = $"Player Damage: {Mathf.RoundToInt(_player.GetPlayerDamage())}";
+        _attackText.text = $"Damage: {Mathf.RoundToInt(_player.GetPlayerDamage())}";
     }
 
     private void BuildingResistance()
     {
-        _resistanceText.text = $"Player Resistance: {Mathf.RoundToInt(_player.GetResistance())}";
+        _resistanceText.text = $"Resistance: {Mathf.RoundToInt(_player.GetResistance())}";
     }
 }
