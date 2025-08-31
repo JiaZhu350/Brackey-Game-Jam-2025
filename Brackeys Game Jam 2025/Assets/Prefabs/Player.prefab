@@ -3099,9 +3099,10 @@ MonoBehaviour:
   _uiController: {fileID: 7980508192687395011}
   _cameraFollow: {fileID: 0}
   _groundCheck: {fileID: 7709846095182238008}
-  _baseSpeed: 2.5
+  _baseSpeed: 5
   _speedModifierDivisor: 1
   _minSpeed: 2.5
+  SpeedModifier: 0
   _jumpForce: 12
   _coyoteTime: 0.2
   _normalGravityScale: 2.5
@@ -3120,14 +3121,17 @@ MonoBehaviour:
   _currentHealth: 0
   _minHealth: 50
   _healthModDivisor: 1
+  HealthModifier: 0
   _baseAttackDamage: 10
   _attackRadius: 0.8
   _attackCooldown: 0.4
   _minDamage: 5
   _damageModDivisor: 1
+  DamageModifier: 0
   _baseResistance: 0
   _minResistance: -30
   _resistanceModDivisor: 1
+  ResistanceModifier: 0
   _biscuitAmount: 0
   _isFacingRight: 0
 --- !u!1 &6554881790170328318

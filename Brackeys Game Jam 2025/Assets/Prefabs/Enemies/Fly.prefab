@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7714b205b4366d2448ea4c35ce99e575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 20
   _cooldown: 1
 --- !u!1 &3950467854700269576
 GameObject:
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
+  _maxHp: 15
   _currentHp: 0
   _biscuitsAmount: 10
   _knockbackAmount: 10
