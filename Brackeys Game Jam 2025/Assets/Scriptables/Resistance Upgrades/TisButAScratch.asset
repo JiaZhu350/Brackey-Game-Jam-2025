@@ -24,10 +24,10 @@ MonoBehaviour:
   _stat2LowerRange: -10
   _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
   _itemName: Tis' but a Scratch
-  _initialBiscuitCost: 250
+  _initialBiscuitCost: 500
   _itemDescription: 'I bet you could beat them with one paw tied behind your back!
 
-    
+
 
     +50
     Resistance and -20 Attack Damage'
