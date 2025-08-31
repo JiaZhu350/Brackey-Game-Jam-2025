@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 5905661262193122579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.794261, y: 1.5965058, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 10
+  _maxHp: 200
   _currentHp: 0
   _biscuitsAmount: 15
   _knockbackAmount: 10
@@ -316,10 +316,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementType: 1
-  _patrolSpeed: 10
+  _patrolSpeed: 7
   _chaseSpeed: 6
   _acceleration: 3
-  _deceleration: 5
+  _deceleration: 10
   _detectionRange: 10
   _stoppingDistance: 0.2
   _idleTime: 2
@@ -331,7 +331,7 @@ MonoBehaviour:
   _atkDamage: 20
   _atkWindup: 0.5
   _atkCd: 3
-  _attackRange: 1.7
+  _attackRange: 2
   _dashPower: 0
   _dashDuration: 0
   _audioRange: 8
