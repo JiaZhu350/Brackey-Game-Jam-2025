@@ -300,6 +300,11 @@ MonoBehaviour:
   _biscuitsAmount: 70
   _knockbackAmount: 10
   _knockbackDuration: 1
+  _isBoss: 1
+  _speedMultiplier: 2
+  _attackSpeedMultiplier: 1
+  _damageMultiplier: 1
+  _hasBoost: 0
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 1511297357609555385}
   _animator: {fileID: 6093182075506537851}
@@ -318,7 +323,7 @@ MonoBehaviour:
   _movementType: 1
   _patrolSpeed: 7
   _chaseSpeed: 6
-  _acceleration: 3
+  _acceleration: 5
   _deceleration: 10
   _detectionRange: 20
   _stoppingDistance: 0.2
@@ -329,7 +334,7 @@ MonoBehaviour:
   _jumpCd: 1
   _attackType: 0
   _atkDamage: 20
-  _atkWindup: 0.5
+  _atkWindup: 1
   _atkCd: 3
   _attackRange: 2
   _dashPower: 0
@@ -356,7 +361,6 @@ MonoBehaviour:
   _specialAttackCd: 7
   _specialAcceleration: 20
   _specialSpeed: 10
-  _bossCollider: {fileID: 8623038831357599732}
   _isPerformingSpecial: 0
   _currentCd: 0
 --- !u!1 &6275921064898546474
