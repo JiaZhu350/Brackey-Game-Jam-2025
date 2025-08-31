@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -49,9 +50,12 @@ public class EnemyHealth : MonoBehaviour
                 Player playerChar = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
                 playerChar._canTeleport = true;
                 playerChar.PlayerHeal(playerChar.GetMaxHealth / 2);
-                GameObject.FindGameObjectWithTag("Shop UI").GetComponent<ShopUI>().BuildingShopUI(_shopItems);
+                StartCoroutine(OpenShop());
             }
-            Die();
+            else
+            {
+                Die();
+            }
         }
     }
 
@@ -65,6 +69,13 @@ public class EnemyHealth : MonoBehaviour
         GameObject biscuitInstance = Instantiate(_biscuit, deathLocation, Quaternion.identity);
         biscuitInstance.GetComponent<Collectables>().biscuits = _biscuitsAmount;
         if (_deathFX != null) Instantiate(_deathFX, deathLocation, Quaternion.identity);
+    }
+
+    private IEnumerator OpenShop()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GameObject.FindGameObjectWithTag("Shop UI").GetComponent<ShopUI>().BuildingShopUI(_shopItems);
+        Destroy(gameObject);
     }
 
     private void Die()
