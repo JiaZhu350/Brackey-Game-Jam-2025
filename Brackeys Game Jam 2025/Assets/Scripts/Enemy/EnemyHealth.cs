@@ -63,6 +63,7 @@ public class EnemyHealth : MonoBehaviour
             deathLocation = _biscuitSpawn.position;
         }
         GameObject biscuitInstance = Instantiate(_biscuit, deathLocation, Quaternion.identity);
+        biscuitInstance.GetComponent<Collectables>().biscuits = _biscuitsAmount;
         if (_deathFX != null) Instantiate(_deathFX, deathLocation, Quaternion.identity);
     }
 
