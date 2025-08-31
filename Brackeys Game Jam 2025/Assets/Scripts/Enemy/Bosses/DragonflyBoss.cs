@@ -9,7 +9,6 @@ public class DragonflyBoss : Enemy
     [SerializeField] private float _specialAttackCd = 5f;
     [SerializeField] private float _specialAcceleration = 20f;
     [SerializeField] private float _specialSpeed = 10f;
-    [SerializeField] private BoxCollider2D _bossCollider;
 
     [SerializeField] private bool _isPerformingSpecial = false;
     [SerializeField] private float _currentCd;
@@ -50,7 +49,6 @@ public class DragonflyBoss : Enemy
     private IEnumerator PerformSpecialAttack()
     {
         _isPerformingSpecial = true;
-        _bossCollider.enabled = false;
         _specialIndex = 0;
 
         while (_specialIndex < _xPoints.Length)
@@ -70,7 +68,6 @@ public class DragonflyBoss : Enemy
 
         // Reset
         _isPerformingSpecial = false;
-        _bossCollider.enabled = true;
         _currentCd = _specialAttackCd;
     }
 

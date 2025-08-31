@@ -125,6 +125,14 @@ public class Enemy : MonoBehaviour
         HandleStates();
     }
 
+    public void ModifyStats(float speed, float attackSpd, float damage)
+    {
+        _chaseSpeed *= speed;
+        _atkCd *= attackSpd; 
+        _atkDamage *= damage;
+    }
+
+
     // Idle for a few seconds before resuming patrol
     private void Idle()
     {

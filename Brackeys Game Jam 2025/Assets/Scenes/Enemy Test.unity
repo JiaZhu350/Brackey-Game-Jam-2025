@@ -417,6 +417,11 @@ MonoBehaviour:
   _biscuitsAmount: 10
   _knockbackAmount: 10
   _knockbackDuration: 1
+  _isBoss: 0
+  _speedMultiplier: 1
+  _attackSpeedMultiplier: 1
+  _damageMultiplier: 1
+  _hasBoost: 0
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
   _rb: {fileID: 0}
   _animator: {fileID: 0}
@@ -1769,6 +1774,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4362867641366169493, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6059910272673190339, guid: 2e9340da0c4710740bf58f8122436ccd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7.7261505
@@ -1826,6 +1835,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _isBoss
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _speedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _damageMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 503276018974528420, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _attackSpeedMultiplier
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4681223960705842230, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: '_xPoints.Array.data[0]'
       value: 
