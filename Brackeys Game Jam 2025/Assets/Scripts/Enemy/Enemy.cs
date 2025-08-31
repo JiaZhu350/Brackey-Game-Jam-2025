@@ -125,7 +125,7 @@ public class Enemy : MonoBehaviour
         HandleStates();
     }
 
-    public void ModifyStats(float speed, float attackSpd, float damage)
+    public virtual void ModifyStats(float speed, float attackSpd, float damage)
     {
         _chaseSpeed *= speed;
         _atkCd *= attackSpd; 

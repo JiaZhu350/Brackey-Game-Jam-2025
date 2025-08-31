@@ -19,6 +19,12 @@ public class DragonflyBoss : Enemy
         _currentCd = _specialAttackCd;
     }
 
+    public override void ModifyStats(float speed, float attackSpd, float damage)
+    {
+        base.ModifyStats(speed, attackSpd, damage);
+        _specialSpeed *= speed;
+    }
+
     protected override void Follow()
     {
         if (_currentCd > 0)
