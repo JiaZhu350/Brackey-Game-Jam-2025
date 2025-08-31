@@ -83,7 +83,7 @@ public class Enemy : MonoBehaviour
         switch (_attackType)
         {
             case AttackType.Melee:
-                _attack = new MeleeAttack(_enemyAtkAnim, _attackAudio, _audioVolume);
+                _attack = new MeleeAttack(_enemyAtkAnim, _attackRange, _attackAudio, _audioVolume);
                 break;
             case AttackType.Dash:
                 _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType, _enemyAtkAnim, _attackAudio, _audioVolume);
