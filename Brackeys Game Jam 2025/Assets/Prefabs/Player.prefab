@@ -4105,16 +4105,18 @@ MonoBehaviour:
   _playerAnimation: {fileID: 4733889561429004608}
   _cameraFollow: {fileID: 0}
   _groundCheck: {fileID: 7709846095182238008}
-  _baseSpeed: 2.5
+  _teleportLocation: {fileID: 0}
+  _canTeleport: 1
+  _baseSpeed: 5
   _speedModifierDivisor: 4
   _minSpeed: 2.5
   SpeedModifier: 0
-  _jumpForce: 14
+  _jumpForce: 12
   _coyoteTime: 0.2
   _normalGravityScale: 2.5
-  _fallGravityScale: 3.5
+  _fallGravityScale: 5
   _canDoubleJump: 0
-  _dashCooldown: 1
+  _dashCooldown: 0.5
   _dashTime: 0.2
   _dashSpeed: 20
   _attackPoint: {fileID: 3468731572969087651}
