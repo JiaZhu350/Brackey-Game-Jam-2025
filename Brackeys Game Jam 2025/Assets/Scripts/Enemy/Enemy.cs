@@ -44,15 +44,15 @@ public class Enemy : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform[] _patrolPoints;
-    [SerializeField] private Rigidbody2D _rb;
+    [SerializeField] protected Rigidbody2D _rb;
     [SerializeField] private Transform _player;
     [SerializeField] private BoxCollider2D _groundCheck;
     [SerializeField] private ParticleSystem _dustVFX;
     [SerializeField] private EnemyAttackAnimation _enemyAtkAnim;
 
     [SerializeField] private State _currentState;
-    private IMovement _movement;
-    private IAttack _attack;
+    protected IMovement _movement;
+    protected IAttack _attack;
     private int _patrolIndex;
     private float _idleTimer = 0f;
     [SerializeField] private bool _isStunned = false;
@@ -156,7 +156,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Follows the player
-    private void Follow()
+    protected virtual void Follow()
     {
         if (_movement == null) return;
         if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume);
@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Attacks the player
-    private void Attack()
+    protected virtual void Attack()
     {
         if (_attack != null)
         {
@@ -183,7 +183,7 @@ public class Enemy : MonoBehaviour
         _isStunned = false;
     }
 
-    private void HandleStates()
+    protected virtual void HandleStates()
     {
         float playerDistance = Vector2.Distance(transform.position, _player.position);
         if (playerDistance <= _attackRange) // attacks the player when in range
