@@ -8,11 +8,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void PlayCredits()
-    {
-        //Switch scene to credits scene
-    }
-
     public void StartGame()
     {
         //Switch scene to main game
@@ -22,5 +17,6 @@ public class MainMenu : MonoBehaviour
     public void Tutorial()
     {
         //Switch scene to tutorial
+        SceneManager.LoadScene("Tutorial");
     }
 }
