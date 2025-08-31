@@ -22,11 +22,11 @@ public class StatHolder : MonoBehaviour
 
     private void BuildingAttack()
     {
-        _attackText.text = $"Player Speed: {Mathf.RoundToInt(_player.GetPlayerDamage())}";
+        _attackText.text = $"Player Damage: {Mathf.RoundToInt(_player.GetPlayerDamage())}";
     }
 
     private void BuildingResistance()
     {
-        _resistanceText.text = $"Player Speed: {Mathf.RoundToInt(_player.GetResistance())}";
+        _resistanceText.text = $"Player Resistance: {Mathf.RoundToInt(_player.GetResistance())}";
     }
 }
