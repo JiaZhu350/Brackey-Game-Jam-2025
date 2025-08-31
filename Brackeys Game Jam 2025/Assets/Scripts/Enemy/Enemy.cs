@@ -35,6 +35,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _dashPower;
     [SerializeField] private float _dashDuration;
 
+    [Header("Audio")]
+    [SerializeField] private float _audioRange = 8f;
+    [SerializeField] private float _audioVolume = 0.5f;
+    [SerializeField] private AudioClip _idleAudio;
+    [SerializeField] private AudioClip _followAudio;
+    [SerializeField] private AudioClip _attackAudio;
+
     [Header("References")]
     [SerializeField] private Transform[] _patrolPoints;
     [SerializeField] private Rigidbody2D _rb;
@@ -76,10 +83,10 @@ public class Enemy : MonoBehaviour
         switch (_attackType)
         {
             case AttackType.Melee:
-                _attack = new MeleeAttack(_enemyAtkAnim);
+                _attack = new MeleeAttack(_enemyAtkAnim, _attackAudio, _audioVolume);
                 break;
             case AttackType.Dash:
-                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType, _enemyAtkAnim);
+                _attack = new DashAttack(_dashPower, _dashDuration, _deceleration, groundedType, _enemyAtkAnim, _attackAudio, _audioVolume);
                 break;
             case AttackType.None:
                 _attack = null;
@@ -122,6 +129,7 @@ public class Enemy : MonoBehaviour
     private void Idle()
     {
         if (_movement == null) return;
+        if (_idleAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_idleAudio, transform, _audioVolume / 2);
         _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
         _idleTimer += Time.deltaTime;
         if (_idleTimer >= _idleTime)
@@ -136,6 +144,7 @@ public class Enemy : MonoBehaviour
     {
         if (_movement == null) return;
         if (_patrolPoints == null || _patrolPoints.Length == 0) return; // no points to patrol
+        if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume / 2);
         Transform targetPoint = _patrolPoints[_patrolIndex];
         _movement.MoveToward(targetPoint.position, _patrolSpeed, _acceleration, _rb);
 
@@ -150,6 +159,7 @@ public class Enemy : MonoBehaviour
     private void Follow()
     {
         if (_movement == null) return;
+        if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume);
         _movement.MoveToward(_player.position, _patrolSpeed, _acceleration, _rb);
     }
 
@@ -159,6 +169,7 @@ public class Enemy : MonoBehaviour
         if (_attack != null)
         {
             if (!_attack.rbRestricted && _movement != null) _movement.MoveToward(transform.position, 0f, _deceleration, _rb); // stop moving
+            if (_followAudio != null && PlayerInAudioRange()) SoundFXManager.instance.PlaySoundFXClip(_followAudio, transform, _audioVolume);
             StartCoroutine(_attack.AttackPlayer(_player, _atkDamage, _atkWindup, _atkCd, _rb));
         }
         else Idle();
@@ -215,5 +226,18 @@ public class Enemy : MonoBehaviour
         // Detection range
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, _detectionRange);
+    }
+
+    private bool PlayerInAudioRange()
+    {
+        float playerDistance = Vector2.Distance(transform.position, _player.position);
+        if (playerDistance < _audioRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

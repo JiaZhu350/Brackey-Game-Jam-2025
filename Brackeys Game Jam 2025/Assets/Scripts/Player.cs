@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Rigidbody2D _rigidbody;
     [SerializeField] private UIController _uiController;
+    [SerializeField] private PlayerAnimation _playerAnimation;
 
     [Header("Camera Stuff")]
     [SerializeField] private GameObject _cameraFollow;
@@ -19,22 +20,25 @@ public class Player : MonoBehaviour
 
     //Movement Stats
     [Header("Movement Components")]
-    [SerializeField] private LayerMask _whatIsGround;
+    [SerializeField] private Collider2D _groundCheck;
 
 
     [Header("Movement Logic")]
-    [SerializeField] private float _normalSpeed;
+    [SerializeField] private float _baseSpeed;
     [SerializeField] private float _speedModifierDivisor = 1f;
     [SerializeField] private float _minSpeed = 2.5f;
     private float _horizontalDirection;
     private float _speed;
-    public float SpeedModifier { private set; get; }
+    public float SpeedModifier; //{ private set; get; }
 
 
     [Header("Jump Logic")]
-    [SerializeField] private float _raycastLength;
     [SerializeField] private float _jumpForce;
-    private bool _canJumpAgain;
+    [SerializeField] private float _coyoteTime;
+    [SerializeField] private float _normalGravityScale;
+    [SerializeField] private float _fallGravityScale;
+    private float _coyoteTimeCounter;
+    [SerializeField] private bool _canDoubleJump;
 
 
     [Header("Dashing Logic")]
@@ -53,31 +57,32 @@ public class Player : MonoBehaviour
 
 
     [Header("Health")]
-    [SerializeField] private float _baseMaxHeath;
+    [SerializeField] private float _baseMaxHealth;
     [SerializeField] private float _invincibleCooldown;
-    private float _maxHealth;
+    // private float _maxHealth;
+    public float _maxHealth;
     [SerializeField] private float _currentHealth;
     [SerializeField] private float _minHealth = 50.0f;
     [SerializeField] private float _healthModDivisor = 1f;
     private bool _isInvincible;
-    public float HealthModifier { private set; get; } // Reference to modified max health rather than current health
+    public float HealthModifier; //{ private set; get; } // Reference to modified max health rather than current health
 
 
     [Header("Attack")]
-    [SerializeField] private float _attackDamage;
+    [SerializeField] private float _baseAttackDamage;
     [SerializeField] private float _attackRadius;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private float _minDamage = 5f;
     [SerializeField] private float _damageModDivisor = 1f;
     private bool _canAttack;
-    public float DamageModifier { private set; get; }
+    public float DamageModifier; //{ private set; get; }
 
 
     [Header("Resistance")]
     [SerializeField] private float _baseResistance;
     [SerializeField] private float _minResistance = -30f;
     [SerializeField] private float _resistanceModDivisor = 1f;
-    public float ResistanceModifier { private set; get; }
+    public float ResistanceModifier; //{ private set; get; }
 
     [Header("Inventory")]
     [SerializeField] private int _biscuitAmount = 0;
@@ -104,10 +109,29 @@ public class Player : MonoBehaviour
         if (_isDashing || _isPlayerDead) { return; }
 
         _horizontalDirection = Input.GetAxisRaw("Horizontal");
+        SwitchGravityScale();
 
-        if (Keyboard.current.spaceKey.wasPressedThisFrame && CanJump())
+        if (IsGrounded())
         {
-            PlayerJump();
+            _coyoteTimeCounter = _coyoteTime;
+            _canDoubleJump = true;
+        }
+        else
+        {
+            _coyoteTimeCounter -= Time.deltaTime;
+        }
+
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (_coyoteTimeCounter > 0f)
+            {
+                PlayerJump();
+            }
+            else if (_canDoubleJump)
+            {
+                _canDoubleJump = false;
+                PlayerJump();
+            }
         }
 
         if (Keyboard.current.shiftKey.wasPressedThisFrame && _canDash)
@@ -152,13 +176,13 @@ public class Player : MonoBehaviour
         _isInvincible = false;
         _isFacingRight = true;
         _isDashing = false;
-        
-        _canJumpAgain = false;
+
         _canDash = true;
         _canAttack = true;
+        _canDoubleJump = false;
 
-        _speed = _normalSpeed;
-        _currentHealth = _maxHealth = _baseMaxHeath + Mathf.Max(HealthModifier,_minHealth - _baseMaxHeath);
+        _speed = _baseSpeed;
+        _currentHealth = _maxHealth = _baseMaxHealth + Mathf.Max(HealthModifier, _minHealth - _baseMaxHealth);
     }
 
 
@@ -190,16 +214,27 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool CanJump()
+    public bool IsGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, _raycastLength, _whatIsGround) || _canJumpAgain;
+        return Physics2D.OverlapAreaAll(_groundCheck.bounds.min, _groundCheck.bounds.max, LayerMask.GetMask("Ground")).Length > 0;
     }
 
     private void PlayerJump()
     {
         _rigidbody.linearVelocityY = 0f; // Reset the linear Y velocity to allow for better jumping logic
-        _rigidbody.AddForce(transform.up * _jumpForce);
-        _canJumpAgain = !_canJumpAgain;
+        _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
+    }
+
+    private void SwitchGravityScale()
+    {
+        if (_rigidbody.linearVelocityY >= 0)
+        {
+            _rigidbody.gravityScale = _normalGravityScale;
+        }
+        else
+        {
+            _rigidbody.gravityScale = _fallGravityScale;
+        }
     }
 
     private IEnumerator Dashing()
@@ -214,12 +249,16 @@ public class Player : MonoBehaviour
         }
         else
         {
-            _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier/_speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
+            _rigidbody.linearVelocity = new Vector2(-1 * Mathf.Max(_dashSpeed + SpeedModifier / _speedModifierDivisor, _minSpeed), 0f); //Dashing Speed
         }
-        
+
+        _playerAnimation.StartDash();
+
         yield return new WaitForSeconds(_dashTime);
         _rigidbody.gravityScale = originalGravity;
         _isDashing = false;
+
+        _playerAnimation.StopDash();
 
         yield return new WaitForSeconds(_dashCooldown);
         _canDash = true;
@@ -234,9 +273,11 @@ public class Player : MonoBehaviour
 
         foreach (Collider2D _enemy in _hitEnemies)
         {
-            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
-            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_attackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
+            Debug.Log(_enemy.name + " is hit for " + Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage) + " damage"); //Logic for dealing damage
+            _enemy.GetComponent<EnemyHealth>().TakeDamage(Mathf.Max(_baseAttackDamage + DamageModifier/_damageModDivisor, _minDamage), transform);
         }
+
+        _playerAnimation.StartAttackAnimation();
 
         yield return new WaitForSeconds(_attackCooldown);
 
@@ -248,6 +289,8 @@ public class Player : MonoBehaviour
         if (_isInvincible){ return; }
 
         Debug.Log($"Player took {_damageTaken} dmg");
+
+        _playerAnimation.PlayerHurt();
 
         float resistanceCalculation = Mathf.Max(_baseResistance + ResistanceModifier/_resistanceModDivisor, _minResistance) / 100f;
         if (resistanceCalculation > 0.9f)

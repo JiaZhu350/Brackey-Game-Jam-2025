@@ -11,14 +11,18 @@ public class DashAttack : IAttack
     private float _deceleration;
     private bool _grounded;
     private EnemyAttackAnimation _atkAnim;
+    private AudioClip _atkSound;
+    private float _volume;
 
-    public DashAttack(float dashPower, float dashDuration, float deceleration, bool grounded, EnemyAttackAnimation atkAnim)
+    public DashAttack(float dashPower, float dashDuration, float deceleration, bool grounded, EnemyAttackAnimation atkAnim, AudioClip atkSound = null, float volume = 0)
     {
         this._dashPower = dashPower;
         this._dashDuration = dashDuration;
         this._deceleration = deceleration;
         this._grounded = grounded;
         this._atkAnim = atkAnim;
+        this._atkSound = atkSound;
+        this._volume = volume;
     }
     public IEnumerator AttackPlayer(Transform player, float dmg, float windup, float cd, Rigidbody2D rb)
     {
@@ -43,6 +47,7 @@ public class DashAttack : IAttack
         _isAttacking = true;
         _atkAnim.StartAttack();
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        if (_atkSound != null) SoundFXManager.instance.PlaySoundFXClip(_atkSound, rb.transform, _volume, regulated: false);
 
         // Wind-up
         yield return new WaitForSeconds(windup);

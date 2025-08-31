@@ -10,17 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8250c46812ee3514aabcaac699fa92bd, type: 3}
-  m_Name: DeadlyBiscuit
+  m_Name: EnragedZoomies
   m_EditorClassIdentifier: 
-  _statModIncrease: 2
-  _statModDecrease: 3
+  _baseStat1: 2
+  _baseStat2: 1
   _riskLevel: 0
-  _statIncreaseAmount: 50
-  _statDecreaseAmount: 20
-  _normalRiskCostReduction: 40
-  _riskUpperLimit: 30
-  _riskLowerLimit: -30
+  _baseStat1IncreaseAmount: 25
+  _baseStat2IncreaseAmount: -70
+  _normalRiskCostReduction: 125
+  _stat1UpperRange: 10
+  _stat1LowerRange: -10
+  _stat2UpperRange: 35
+  _stat2LowerRange: -35
   _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
-  _itemName: DeadlyBiscuit
-  _initialBiscuitCost: 60
-  _itemDescription: More Damage at the cost of resistance
+  _itemName: Enraged Zoomies
+  _initialBiscuitCost: 250
+  _itemDescription: "They haven\u2019t even seen your true form yet! RAHHHHHHH!!!\r\n\r\n+25
+    Attack Damage and -70 Health"

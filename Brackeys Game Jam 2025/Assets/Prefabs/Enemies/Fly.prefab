@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7714b205b4366d2448ea4c35ce99e575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 10
+  _damage: 20
   _cooldown: 1
 --- !u!1 &3950467854700269576
 GameObject:
@@ -190,6 +190,11 @@ MonoBehaviour:
   _attackRange: 0
   _dashPower: 0
   _dashDuration: 0
+  _audioRange: 5
+  _audioVolume: 0.5
+  _idleAudio: {fileID: 8300000, guid: a62f316ac5369b549b5c5afdbeb11c11, type: 3}
+  _followAudio: {fileID: 8300000, guid: a62f316ac5369b549b5c5afdbeb11c11, type: 3}
+  _attackAudio: {fileID: 0}
   _patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -259,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
+  _maxHp: 15
   _currentHp: 0
   _biscuitsAmount: 10
   _knockbackAmount: 10

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8250c46812ee3514aabcaac699fa92bd, type: 3}
+  m_Name: IronGut
+  m_EditorClassIdentifier: 
+  _baseStat1: 3
+  _baseStat2: 2
+  _riskLevel: 0
+  _baseStat1IncreaseAmount: 30
+  _baseStat2IncreaseAmount: -15
+  _normalRiskCostReduction: 125
+  _stat1UpperRange: 15
+  _stat1LowerRange: -15
+  _stat2UpperRange: 5
+  _stat2LowerRange: -5
+  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemName: Iron Gut
+  _initialBiscuitCost: 250
+  _itemDescription: 'Who knew all that eating would actually mean something?
+
+    
+
+    +30
+    Resistance and -15 Attack Damage'

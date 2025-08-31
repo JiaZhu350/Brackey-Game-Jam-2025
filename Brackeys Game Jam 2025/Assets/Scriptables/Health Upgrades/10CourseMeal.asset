@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8250c46812ee3514aabcaac699fa92bd, type: 3}
+  m_Name: 10CourseMeal
+  m_EditorClassIdentifier: 
+  _baseStat1: 1
+  _baseStat2: 0
+  _riskLevel: 0
+  _baseStat1IncreaseAmount: 100
+  _baseStat2IncreaseAmount: -8
+  _normalRiskCostReduction: 125
+  _stat1UpperRange: 75
+  _stat1LowerRange: -50
+  _stat2UpperRange: 7
+  _stat2LowerRange: -7
+  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemName: 10 "Course" Meal
+  _initialBiscuitCost: 250
+  _itemDescription: "Did you really need the salmon, cod, tuna, steak, chicken, turkey,
+    bread, eggs, cheese, and potatoes all in one food \u201Ccompound\u201D?\r\n\r\n+100
+    Health and -8 Movespeed"
