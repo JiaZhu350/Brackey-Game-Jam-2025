@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxHp: 25
   _currentHp: 0
-  _biscuitsAmount: 10
+  _biscuitsAmount: 15
   _knockbackAmount: 20
   _knockbackDuration: 0.7
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
