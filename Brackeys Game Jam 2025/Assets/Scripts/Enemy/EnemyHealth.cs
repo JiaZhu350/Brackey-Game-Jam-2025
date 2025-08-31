@@ -16,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float _damageMultiplier = 1f;
     [SerializeField] private bool _hasBoost = false;
     [SerializeField] private Transform _biscuitSpawn;
+    [SerializeField] private ScriptableItems[] _shopItems;
     [Header("References")]
     [SerializeField] private GameObject _biscuit;
     [SerializeField] private Rigidbody2D _rb;
@@ -47,6 +48,7 @@ public class EnemyHealth : MonoBehaviour
                 Player playerChar = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
                 playerChar._canTeleport = true;
                 playerChar.PlayerHeal(playerChar.GetMaxHealth / 2);
+                GameObject.FindGameObjectWithTag("Shop UI").GetComponent<ShopUI>().BuildingShopUI(_shopItems);
             }
             Die();
         }
