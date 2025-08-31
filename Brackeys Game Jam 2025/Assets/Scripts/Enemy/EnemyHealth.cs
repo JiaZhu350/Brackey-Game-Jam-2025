@@ -24,6 +24,8 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private Animator _animator;
     [SerializeField] private ParticleSystem _deathFX;
 
+    private bool _isDead = false;
+
     private void Start()
     {
         _currentHp = _maxHp;
@@ -31,6 +33,7 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float dmg, Transform player)
     {
+        if (_isDead) return;
         _currentHp -= dmg;
         Enemy enemy = gameObject.GetComponent<Enemy>();
         Vector2 dir = ((Vector2)player.position - _rb.position).normalized;
@@ -44,6 +47,7 @@ public class EnemyHealth : MonoBehaviour
         }
         if (_currentHp <= 0)
         {
+            _isDead = true;
             SpawnBiscuit();
             if (_isBoss)
             {
