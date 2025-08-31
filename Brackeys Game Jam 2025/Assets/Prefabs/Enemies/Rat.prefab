@@ -308,7 +308,7 @@ MonoBehaviour:
   _jumpForce: 8
   _jumpCd: 1
   _attackType: 0
-  _atkDamage: 15
+  _atkDamage: 20
   _atkWindup: 0.3
   _atkCd: 2
   _attackRange: 0.9
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 100
+  _maxHp: 20
   _currentHp: 0
   _biscuitsAmount: 10
   _knockbackAmount: 20
