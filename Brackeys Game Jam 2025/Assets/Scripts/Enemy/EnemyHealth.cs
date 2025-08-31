@@ -15,10 +15,12 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float _attackSpeedMultiplier = 1f;
     [SerializeField] private float _damageMultiplier = 1f;
     [SerializeField] private bool _hasBoost = false;
+    [SerializeField] private Transform _biscuitSpawn;
     [Header("References")]
     [SerializeField] private GameObject _biscuit;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private Animator _animator;
+    [SerializeField] private ParticleSystem _deathFX;
 
     private void Start()
     {
@@ -52,7 +54,13 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        GameObject biscuitInstance = Instantiate(_biscuit, transform.position, Quaternion.identity);
+        Vector3 deathLocation = transform.position;
+        if (_biscuitSpawn != null)
+        {
+            deathLocation = _biscuitSpawn.position;
+        }
+        GameObject biscuitInstance = Instantiate(_biscuit, deathLocation, Quaternion.identity);
+        if (_deathFX != null) Instantiate(_deathFX, deathLocation, Quaternion.identity);
         biscuitInstance.GetComponent<Collectables>().biscuits = _biscuitsAmount;
         Destroy(gameObject);
     }

@@ -984,6 +984,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 380899566}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &783290561 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8795896107624054185, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+  m_PrefabInstance: {fileID: 1198614513933962648}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7714b205b4366d2448ea4c35ce99e575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1122733147
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,6 +1866,10 @@ PrefabInstance:
       propertyPath: _acceleration
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4681223960705842230, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
+      propertyPath: _dmgCollision
+      value: 
+      objectReference: {fileID: 783290561}
     - target: {fileID: 4681223960705842230, guid: e9c942583a5e68b4587b9d00c19d0a23, type: 3}
       propertyPath: '_xPoints.Array.data[0]'
       value: 
