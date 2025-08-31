@@ -201,7 +201,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.7955, y: 1.7955, z: 1.7955}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 886065226724898962}
@@ -253,7 +253,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -295,9 +295,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df1568d5ecbfd174dbb5ade620871d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHp: 200
+  _maxHp: 500
   _currentHp: 0
-  _biscuitsAmount: 15
+  _biscuitsAmount: 70
   _knockbackAmount: 10
   _knockbackDuration: 1
   _biscuit: {fileID: 1630555892838676276, guid: 4af2f4e9be68d5647a11435005c08c29, type: 3}
@@ -320,7 +320,7 @@ MonoBehaviour:
   _chaseSpeed: 6
   _acceleration: 3
   _deceleration: 10
-  _detectionRange: 10
+  _detectionRange: 20
   _stoppingDistance: 0.2
   _idleTime: 2
   _isFacingLeft: 1
