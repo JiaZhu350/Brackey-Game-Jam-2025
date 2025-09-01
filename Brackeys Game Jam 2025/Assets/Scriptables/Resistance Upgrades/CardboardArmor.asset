@@ -22,12 +22,12 @@ MonoBehaviour:
   _stat1LowerRange: -15
   _stat2UpperRange: 5
   _stat2LowerRange: -5
-  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemSprite: {fileID: -1996716843837011261, guid: 59be004c48d9ece4cad24b8a7860adab, type: 3}
   _itemName: Cardboard "Armor"
   _initialBiscuitCost: 100
   _itemDescription: 'A marvelous invention! You should take it with you into battle.
 
-    
+
 
     +15
     Resistance and -5 Attack Damage'

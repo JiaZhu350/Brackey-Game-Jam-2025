@@ -22,12 +22,12 @@ MonoBehaviour:
   _stat1LowerRange: -100
   _stat2UpperRange: 10
   _stat2LowerRange: -10
-  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemSprite: {fileID: 6393698179491245536, guid: c9a1709a87cc28b4b857c5392d2d275f, type: 3}
   _itemName: Chonkmaster 9000
   _initialBiscuitCost: 500
   _itemDescription: 'What pathetic creature dares to oppose my magnificent, voluptuous
     majesty?!
 
-    
+
 
     +200 Health and -20 Movespeed'

@@ -22,7 +22,7 @@ MonoBehaviour:
   _stat1LowerRange: -75
   _stat2UpperRange: 5
   _stat2LowerRange: -5
-  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemSprite: {fileID: 6393698179491245536, guid: c9a1709a87cc28b4b857c5392d2d275f, type: 3}
   _itemName: Suspicious Cat Nip
   _initialBiscuitCost: 100
   _itemDescription: "Rest and Relaxation? More like Ready and Roaring for battle!

@@ -22,7 +22,7 @@ MonoBehaviour:
   _stat1LowerRange: -15
   _stat2UpperRange: 20
   _stat2LowerRange: -20
-  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemSprite: {fileID: -8885971661949164133, guid: c5f6b66e791605d4485bb8536133a81b, type: 3}
   _itemName: Black Market Nip
   _initialBiscuitCost: 500
   _itemDescription: "Now, this is the hard stuff. Don\u2019t go tellin\u2019 people

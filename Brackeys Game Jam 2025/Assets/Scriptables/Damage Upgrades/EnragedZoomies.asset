@@ -22,7 +22,7 @@ MonoBehaviour:
   _stat1LowerRange: -10
   _stat2UpperRange: 35
   _stat2LowerRange: -35
-  _itemSprite: {fileID: 989241913634400382, guid: 2096a967ad732354e898a972fc27e282, type: 3}
+  _itemSprite: {fileID: -638970700489187088, guid: eff2ca90b69fc5b4b8cead0eac96bc15, type: 3}
   _itemName: Enraged Zoomies
   _initialBiscuitCost: 250
   _itemDescription: "They haven\u2019t even seen your true form yet! RAHHHHHHH!!!\r\n\r\n+25
